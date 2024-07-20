@@ -32,3 +32,5 @@ const sidebarMenu = [
   //     route: "/"
   // },
 ];
+
+export default sidebarMenu;
