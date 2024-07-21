@@ -2,6 +2,8 @@ import React from "react";
 import Image from "next/image";
 import Humburger from "../../assets/humburger.svg";
 import Button from "@/app/components/Button/Button";
+import AddIcon from "@/app/assets/AddIcon.svg";
+// import AddIcon from "../../assets/AddIcon.svg"
 
 const Header = ({ onToggleSidebar }) => {
   return (
@@ -18,13 +20,12 @@ const Header = ({ onToggleSidebar }) => {
           <h1 className="text-xl text-pc-40">Phonebook</h1>
         </div>
         <div className="flex justify-center items-center">
-          {/* <button className="text-sm px-2 py-2 cursor-pointer rounded-md hover:opacity-90 focus:outline-none bg-pc-40 text-white w-[100px] h-[40px] ">
-            Create contact
-          </button> */}
           <Button
-            labe={"Create contact"}
-            style={"primary"}
-            customClassname="w-full h-[40px]"
+            label="Create Contact"
+            style="Primary"
+            customClassName="w-full h-[40px]"
+            iconType="leading"
+            icon={<Image src={AddIcon} alt="Vercel Logo" />}
           />
           <div className=" ml-3">dropdown</div>
         </div>
