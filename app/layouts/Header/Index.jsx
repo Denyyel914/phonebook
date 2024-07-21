@@ -26,6 +26,7 @@ const Header = ({ onToggleSidebar }) => {
             customClassName="w-full h-[40px]"
             iconType="leading"
             icon={<Image src={AddIcon} alt="Vercel Logo" />}
+            onClick={console.log("hahaha")}
           />
           <div className=" ml-3">dropdown</div>
         </div>
