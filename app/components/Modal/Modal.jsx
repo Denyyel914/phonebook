@@ -1,4 +1,5 @@
 import ReactModal from "react-modal";
+import Button from "../Button/Button";
 
 const Modal = ({
   isOpen,
@@ -11,7 +12,7 @@ const Modal = ({
   return (
     <ReactModal
       isOpen={isOpen}
-      onClose={onclose}
+      onClose={onClose}
       contentLabel="Modal"
       className="fixed inset-0 flex items-center justify-center z-[1000]"
       shouldCloseOnOverlayClick={false}
@@ -21,7 +22,7 @@ const Modal = ({
     >
       <div
         className={`bg-[E7F3FC] rounded-lg shadow-lg ${
-          soze ? `max-w-${size}` : "max-w-lg"
+          size ? `max-w-${size}` : "max-w-lg"
         } px-5`}
       >
         <div className="flex justify-between items-center mb-3 border-b border-navOutline py-4 px-3">
@@ -36,6 +37,7 @@ const Modal = ({
             <Button
               className="text-gray-600 hover:text-red-600 text-xs"
               onClose={onClose}
+              style="Primary"
             >
               X
             </Button>

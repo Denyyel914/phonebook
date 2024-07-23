@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Humburger from "../../assets/humburger.svg";
 import Button from "@/app/components/Button/Button";
 import AddIcon from "@/app/assets/AddIcon.svg";
 // import AddIcon from "../../assets/AddIcon.svg"
+import Modal from "@/app/components/Modal/Modal";
 
 const Header = ({ onToggleSidebar }) => {
+  const [isModalOpen, isSetModalOpen] = useState(false);
+
+  const handleModal = () => {
+    isSetModalOpen(true);
+    console.log(isModalOpen);
+  };
   return (
     <header className="border-b border-outline fixed top-0 z-50 bg-white w-full">
       <nav className="w-full mx-auto flex items-center justify-between flex-wrap px-4 py-3">
@@ -26,11 +33,23 @@ const Header = ({ onToggleSidebar }) => {
             customClassName="w-full h-[40px]"
             iconType="leading"
             icon={<Image src={AddIcon} alt="Vercel Logo" />}
-            onClick={console.log("hahaha")}
+            onClick={handleModal}
           />
-          <div className=" ml-3">dropdown</div>
+          <div className=" ml-3">{isModalOpen}</div>
         </div>
       </nav>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => isSetModalOpen(false)}
+        title="sample title"
+        titleCustomClass={"text-2xl"}
+      >
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dictum
+          elit et lacinia ornare. Nam ac nulla posuere, cursus risus a,
+        </p>
+        <div className="flex justify-end mt-7"></div>
+      </Modal>
     </header>
   );
 };
