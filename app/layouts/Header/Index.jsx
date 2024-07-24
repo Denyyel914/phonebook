@@ -3,9 +3,9 @@ import Image from "next/image";
 import Humburger from "../../assets/humburger.svg";
 import Button from "@/app/components/Button/Button";
 import AddIcon from "@/app/assets/AddIcon.svg";
-
 import Modal from "@/app/components/Modal/Modal";
 import CheckCircle from "@/app/assets/check_circle.svg";
+import Input from "@/app/components/Input/Input";
 
 const Header = ({ onToggleSidebar }) => {
   const [isModalOpen, isSetModalOpen] = useState(false);
@@ -52,6 +52,8 @@ const Header = ({ onToggleSidebar }) => {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dictum
           elit et lacinia ornare. Nam ac nulla posuere, cursus risus a,
         </p>
+        <Input placeholder="test title" />
+
         <div className="flex justify-end mt-7 pb-4">
           <Button
             label="Cancel"
