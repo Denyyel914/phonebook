@@ -11,7 +11,10 @@ const Header = ({ onToggleSidebar }) => {
 
   const handleModal = () => {
     isSetModalOpen(true);
-    console.log(isModalOpen);
+  };
+
+  const closeModal = () => {
+    isSetModalOpen(false);
   };
   return (
     <header className="border-b border-outline fixed top-0 z-50 bg-white w-full">
@@ -40,7 +43,7 @@ const Header = ({ onToggleSidebar }) => {
       </nav>
       <Modal
         isOpen={isModalOpen}
-        onClose={() => isSetModalOpen(false)}
+        onClose={closeModal}
         title="sample title"
         titleCustomClass={"text-2xl"}
       >

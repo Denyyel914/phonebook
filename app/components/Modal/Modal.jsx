@@ -12,7 +12,7 @@ const Modal = ({
   return (
     <ReactModal
       isOpen={isOpen}
-      onClose={onClose}
+      onRequestClose={onClose}
       contentLabel="Modal"
       className="fixed inset-0 flex items-center justify-center z-[1000]"
       shouldCloseOnOverlayClick={false}
@@ -21,7 +21,7 @@ const Modal = ({
       overlayClassName="fixed top-0 left-0 right-0 bottom-0 z-50 bg-black bg-opacity-50"
     >
       <div
-        className={`bg-[E7F3FC] rounded-lg shadow-lg ${
+        className={`bg-[#E7F3FC] rounded-lg shadow-lg ${
           size ? `max-w-${size}` : "max-w-lg"
         } px-5`}
       >
@@ -34,13 +34,12 @@ const Modal = ({
             ""
           )}
           {onClose ? (
-            <Button
-              className="text-gray-600 hover:text-red-600 text-xs"
-              onClose={onClose}
-              style="Primary"
+            <button
+              className="text-gray-600 hover:text-red-600 text-xs pt-5"
+              onClick={onClose}
             >
               X
-            </Button>
+            </button>
           ) : (
             ""
           )}
