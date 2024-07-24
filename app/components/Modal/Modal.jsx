@@ -34,12 +34,15 @@ const Modal = ({
             ""
           )}
           {onClose ? (
-            <button
-              className="text-gray-600 hover:text-red-600 text-xs pt-5"
+            <Button
+              // className="text-gray-600 hover:text-red-600 text-xs pt-5"
+              // onClick={onClose}
+              label="X"
+              customClassName="text-black"
               onClick={onClose}
             >
               X
-            </button>
+            </Button>
           ) : (
             ""
           )}

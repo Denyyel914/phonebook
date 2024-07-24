@@ -13,7 +13,9 @@ const Button = ({ label, style, customClassName, iconType, icon, onClick }) => {
       {/* <span style={iconType == "leading" && { paddingLeft: "5px" }}>
         {iconType === "leading" && icon}
       </span> */}
-      {iconType == "leading" && icon}
+      {iconType === "leading" && (
+        <span style={{ marginLeft: "5px" }}>{icon}</span>
+      )}
       <span
         style={
           iconType
@@ -31,7 +33,9 @@ const Button = ({ label, style, customClassName, iconType, icon, onClick }) => {
       {/* <span style={iconType == "leading" && { paddingLeft: "5px" }}>
         {iconType === "trailing" && icon}
       </span> */}
-      {iconType == "trailing" && icon}
+      {iconType === "trailing" && (
+        <span style={{ marginRight: "4px" }}>{icon}</span>
+      )}
     </button>
   );
 };

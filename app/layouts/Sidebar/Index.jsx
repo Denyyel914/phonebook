@@ -1,42 +1,3 @@
-// import React, { Fragment } from "react";
-// import Image from "next/image";
-// import Link from "next/link";
-// import { usePanthname } from "next/navigation";
-// import sidebarMenu from "../../data/sidebarMenu";
-
-// const Sidebar = ({ isExanded }) => {
-//   const sidebarClass = isExanded ? "w-60 p-2" : "w-24";
-//   const pathname = usePathname();
-
-//   const ListMenu = sidebarMenu.map((menu, index) => {
-//     <Fragment key={menu.id}>
-//       {menu.name === "home" ? (
-//         <button
-//           className={`${
-//             isExpanded ? "w-[220px] h-45px px-3 m-2" : "w-[76px] h-[65px] mx-2"
-//           } group border-0 hover:bg-[#B7DAFC]
-//           ${pathName === "/" ? "bg-[0077D4] rounded" : ""}
-//           `}
-//         >
-//           <ul>
-//             <li>
-
-//                <Link href={menu.route} className={${isExpanded ? 'flex' : ''}}>
-//                </Link>
-//             </li>
-//           </ul>
-//         </button>
-//       ) : (
-//         ""
-//       )}
-//     </Fragment>;
-//   });
-
-//   return <div></div>;
-// };
-
-// export default Sidebar;
-
 import React, { useState, useEffect, Fragment } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -54,8 +15,8 @@ const Sidebar = ({ isExpanded }) => {
         <button
           className={`${
             isExpanded
-              ? "w-[220px] h-[45px] px-3 m-2"
-              : "w-[76px] h-[65px] mx-2"
+              ? "w-[220px] h-[45px] px-3 m-2 transition-width duration-200 ease-in-out"
+              : "w-[76px] h-[65px] mx-2 transition-width duration-200 ease-in-out"
           } group border-0 hover:bg-[#B7DAFC]
                         ${pathname === "/" ? "bg-[#0077D4] rounded" : ""}`}
         >
