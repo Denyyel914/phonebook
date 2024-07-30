@@ -6,17 +6,23 @@ import AddIcon from "@/app/assets/AddIcon.svg";
 import Modal from "@/app/components/Modal/Modal";
 import CheckCircle from "@/app/assets/check_circle.svg";
 import Input from "@/app/components/Input/Input";
+import CreateModal from "@/app/components/Modal/Create";
 
 const Header = ({ onToggleSidebar }) => {
   const [isModalOpen, isSetModalOpen] = useState(false);
 
   const handleModal = () => {
     isSetModalOpen(true);
+    console.log(isModalOpen);
   };
 
   const closeModal = () => {
     isSetModalOpen(false);
   };
+
+  // const handleChange(e) {
+  //   e.
+  // }
   return (
     <header className="border-b border-outline fixed top-0 z-50 bg-white w-full">
       <nav className="w-full mx-auto flex items-center justify-between flex-wrap px-4 py-3">
@@ -42,7 +48,8 @@ const Header = ({ onToggleSidebar }) => {
           <div className=" ml-3">{isModalOpen}</div>
         </div>
       </nav>
-      <Modal
+
+      {/* <Modal
         isOpen={isModalOpen}
         onClose={closeModal}
         title="sample title"
@@ -52,7 +59,6 @@ const Header = ({ onToggleSidebar }) => {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dictum
           elit et lacinia ornare. Nam ac nulla posuere, cursus risus a,
         </p>
-        <Input placeholder="test title" />
 
         <div className="flex justify-end mt-7 pb-4">
           <Button
@@ -71,7 +77,12 @@ const Header = ({ onToggleSidebar }) => {
             onClick={handleModal}
           />
         </div>
-      </Modal>
+      </Modal> */}
+      <CreateModal
+        isModalOpen={isModalOpen}
+        closeModal={closeModal}
+        handleModal={handleModal}
+      />
     </header>
   );
 };
