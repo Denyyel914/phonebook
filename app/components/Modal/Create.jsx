@@ -1,21 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import Modal from "./Modal";
 import Button from "../Button/Button";
 import Image from "next/image";
 import CheckCircle from "@/app/assets/check_circle.svg";
+import Input from "../Input/Input";
 const CreateModal = ({ isModalOpen, handleModal, closeModal }) => {
+  const [test, setTest] = useState("");
   return (
     <div>
       <Modal
         isOpen={isModalOpen}
         onClose={closeModal}
-        title="sample title"
+        title="Add Contact"
         titleCustomClass={"text-2xl"}
+        size="xl"
+        width="40vw"
       >
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dictum
-          elit et lacinia ornare. Nam ac nulla posuere, cursus risus a,
-        </p>
+        <Input placeholder="test title" label="test label" value={test} />
+        <div className="flex justify-between mt-5">
+          <div>
+            <Input placeholder="test title" label="test label" value={test} />
+          </div>
+          <div>
+            <Input placeholder="test title" label="test label" value={test} />
+          </div>
+        </div>
 
         <div className="flex justify-end mt-7 pb-4">
           <Button
