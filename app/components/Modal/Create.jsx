@@ -7,33 +7,26 @@ import Input from "../Input/Input";
 import { useForm, Controller } from "react-hook-form";
 
 const CreateModal = ({ isModalOpen, handleModal, closeModal }) => {
-  // const {
-  //   control,
-  //   handleSubmit,
-  //   formState: { errors },
-  // } = useForm();
-
-  // const [test, setTest] = useState("");
-  const [form, setForm] = useState({
-    contact_name: "",
-    area_code: "",
-    phone_number: "",
-    email: "",
-    address: "",
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      contactName: "",
+      areaCode: "",
+      phoneNumber: "",
+      email: "",
+      address: "",
+    },
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((prevForm) => ({
-      ...prevForm,
-      [name]: value,
-    }));
+  const onSubmit = (data) => {
+    console.log(data);
+    reset();
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(form);
-  };
   return (
     <div>
       <Modal
@@ -44,11 +37,96 @@ const CreateModal = ({ isModalOpen, handleModal, closeModal }) => {
         size="xl"
         width="35vw"
       >
-        <Input
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Controller
+            name="contactName"
+            control={control}
+            render={({ field }) => (
+              <Input
+                {...field}
+                placeholder="test title"
+                label="Contact name"
+                error={errors.contactName}
+              />
+            )}
+          />
+          <div className="flex justify-between mt-5">
+            <div>
+              <Controller
+                name="areaCode"
+                control={control}
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    placeholder="test title"
+                    label="Area code"
+                    customClassName="w-[150px]"
+                    error={errors.areaCode}
+                  />
+                )}
+              />
+            </div>
+            <div>
+              <Controller
+                name="phoneNumber"
+                control={control}
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    placeholder="test title"
+                    label="Phone number"
+                    error={errors.phoneNumber}
+                  />
+                )}
+              />
+            </div>
+          </div>
+          <div className="mt-4">
+            <Controller
+              name="email"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  placeholder="test title"
+                  label="Email"
+                  error={errors.email}
+                />
+              )}
+            />
+          </div>
+          <div className="mt-4">
+            <Controller
+              name="address"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  placeholder="test title"
+                  label="Address"
+                  error={errors.address}
+                />
+              )}
+            />
+          </div>
+          <div className="flex justify-end mt-7 pb-4">
+            <Button
+              label="Cancel"
+              customClassName="mr-2 w-[80px] h-[40px] text-[#0077D4]"
+              onClick={closeModal}
+            />
+            <Button
+              label="Create contact"
+              style="Primary"
+              customClassName="w-36 h-[40px]"
+              iconType="leading"
+              icon={<Image src={CheckCircle} alt="Check Circle" />}
+            />
+          </div>
+        </form>
+        {/* <Input
           placeholder="test title"
           label="Contact name"
-          value={form.contact_name}
-          onChange={handleChange}
           name="contact_name"
         />
         <div className="flex justify-between mt-5">
@@ -57,8 +135,6 @@ const CreateModal = ({ isModalOpen, handleModal, closeModal }) => {
               placeholder="test title"
               label="Area code"
               name="area_code"
-              value={form.area_code}
-              onChange={handleChange}
               customClassName="w-[150px]"
             />
           </div>
@@ -67,29 +143,15 @@ const CreateModal = ({ isModalOpen, handleModal, closeModal }) => {
               placeholder="test title"
               label="Phone number"
               name="phone_number"
-              value={form.phone_number}
-              onChange={handleChange}
             />
           </div>
         </div>
 
         <div className="mt-4">
-          <Input
-            placeholder="test title"
-            label="Email"
-            name="email"
-            value={form.email}
-            onChange={handleChange}
-          />
+          <Input placeholder="test title" label="Email" name="email" />
         </div>
         <div className="mt-4">
-          <Input
-            placeholder="test title"
-            label="Address"
-            name="address"
-            value={form.address}
-            onChange={handleChange}
-          />
+          <Input placeholder="test title" label="Address" name="address" />
         </div>
 
         <div className="flex justify-end mt-7 pb-4">
@@ -106,9 +168,8 @@ const CreateModal = ({ isModalOpen, handleModal, closeModal }) => {
             customClassName="w-36 h-[40px]"
             iconType="leading"
             icon={<Image src={CheckCircle} alt="Vercel Logo" />}
-            onClick={handleSubmit}
           />
-        </div>
+        </div> */}
       </Modal>
     </div>
   );
