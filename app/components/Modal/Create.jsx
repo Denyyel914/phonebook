@@ -41,12 +41,13 @@ const CreateModal = ({ isModalOpen, handleModal, closeModal }) => {
           <Controller
             name="contactName"
             control={control}
+            rules={{ required: "Contact name is required" }}
             render={({ field }) => (
               <Input
                 {...field}
                 placeholder="test title"
                 label="Contact name"
-                error={errors.contactName}
+                errorMessage={errors.contactName?.message}
               />
             )}
           />
@@ -55,13 +56,14 @@ const CreateModal = ({ isModalOpen, handleModal, closeModal }) => {
               <Controller
                 name="areaCode"
                 control={control}
+                rules={{ required: "Contact name is required" }}
                 render={({ field }) => (
                   <Input
                     {...field}
                     placeholder="test title"
                     label="Area code"
                     customClassName="w-[150px]"
-                    error={errors.areaCode}
+                    errorMessage={errors.areaCode?.message}
                   />
                 )}
               />
@@ -70,12 +72,13 @@ const CreateModal = ({ isModalOpen, handleModal, closeModal }) => {
               <Controller
                 name="phoneNumber"
                 control={control}
+                rules={{ required: "Contact name is required" }}
                 render={({ field }) => (
                   <Input
                     {...field}
                     placeholder="test title"
                     label="Phone number"
-                    error={errors.phoneNumber}
+                    errorMessage={errors.phoneNumber?.message}
                   />
                 )}
               />
@@ -85,12 +88,13 @@ const CreateModal = ({ isModalOpen, handleModal, closeModal }) => {
             <Controller
               name="email"
               control={control}
+              rules={{ required: "Contact name is required" }}
               render={({ field }) => (
                 <Input
                   {...field}
                   placeholder="test title"
                   label="Email"
-                  error={errors.email}
+                  errorMessage={errors.email?.message}
                 />
               )}
             />
@@ -99,12 +103,13 @@ const CreateModal = ({ isModalOpen, handleModal, closeModal }) => {
             <Controller
               name="address"
               control={control}
+              rules={{ required: "Contact name is required" }}
               render={({ field }) => (
                 <Input
                   {...field}
                   placeholder="test title"
                   label="Address"
-                  error={errors.address}
+                  errorMessage={errors.address?.message}
                 />
               )}
             />
