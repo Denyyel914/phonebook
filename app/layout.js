@@ -5,7 +5,8 @@ import "./globals.css";
 import Header from "./layouts/Header/Index";
 import Sidebar from "./layouts/Sidebar/Index";
 import Footer from "./layouts/Footer/Index";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -16,11 +17,23 @@ const metadata = {
 
 export default function RootLayout({ children }) {
   const [isSidebarExpanded, setSidebarExpanded] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const router = useRouter();
 
   const toggleSidebar = () => {
     setSidebarExpanded(!isSidebarExpanded);
     console.log(isSidebarExpanded);
   };
+
+  useEffect(() => {
+    console.log(router);
+    const loggedIn = localStorage.getItem("isLoggedIn") === "true"; // Or use your own logic
+    setIsLoggedIn(loggedIn);
+
+    if (!loggedIn) {
+      router.push("/login");
+    }
+  }, [router]);
   return (
     <html lang="en">
       <body>

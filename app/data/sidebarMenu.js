@@ -13,6 +13,7 @@ const sidebarMenu = [
     icon: Home,
     route: "/dashboard",
   },
+
   // {
   //     id: 3,
   //     name: 'projects',
