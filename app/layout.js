@@ -5,10 +5,7 @@ import "./globals.css";
 import Header from "./layouts/Header/Index";
 import Sidebar from "./layouts/Sidebar/Index";
 import Footer from "./layouts/Footer/Index";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-
-// const inter = Inter({ subsets: ["latin"] });
+import { useState } from "react";
 
 const metadata = {
   title: "Create Next App",
@@ -17,40 +14,25 @@ const metadata = {
 
 export default function RootLayout({ children }) {
   const [isSidebarExpanded, setSidebarExpanded] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const router = useRouter();
 
   const toggleSidebar = () => {
     setSidebarExpanded(!isSidebarExpanded);
     console.log(isSidebarExpanded);
   };
 
-  useEffect(() => {
-    console.log(router);
-    const loggedIn = localStorage.getItem("isLoggedIn") === "true"; // Or use your own logic
-    setIsLoggedIn(loggedIn);
-
-    if (!loggedIn) {
-      router.push("/login");
-    }
-  }, [router]);
   return (
     <html lang="en">
       <body>
-        {isLoggedIn ? ( // Conditional rendering based on login state
-          <div className="flex flex-col">
-            <Header onToggleSidebar={toggleSidebar} />
-            <div className="flex flex-1">
-              <Sidebar isExpanded={isSidebarExpanded} />
-              <div className="flex-1 pt-24 px-12 pb-12 lg:px-12 relative overflow-y-auto max-h-screen">
-                <div className="overflow-auto">{children}</div>
-              </div>
-              <Footer />
+        <div className="flex flex-col">
+          <Header onToggleSidebar={toggleSidebar} />
+          <div className="flex flex-1">
+            <Sidebar isExpanded={isSidebarExpanded} />
+            <div className="flex-1 pt-24 px-12 pb-12 lg:px-12 relative overflow-y-auto max-h-screen">
+              <div className="overflow-auto">{children}</div>
             </div>
+            <Footer />
           </div>
-        ) : (
-          <div>{children}</div> // Render children directly if not logged in (Login page will be rendered here)
-        )}
+        </div>
       </body>
     </html>
   );

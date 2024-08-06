@@ -17,19 +17,9 @@ const Login = () => {
       password: "",
     },
   });
-  const router = useRouter();
-
-  // const handleLogin = () => {
-  //   // Perform login logic here
-  //   localStorage.setItem("isLoggedIn", "true");
-  //   router.push("/"); // Redirect to home page
-  // };
 
   const onSubmit = (data) => {
     console.log(data);
-    localStorage.setItem("isLoggedIn", "true");
-    router.push("/"); // Redirect to home page
-    console.log("hahaha");
   };
   return (
     <div>
