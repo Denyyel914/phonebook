@@ -3,14 +3,33 @@ import React from "react";
 import Input from "@/app/components/Input/Input";
 import Button from "@/app/components/Button/Button";
 import { useRouter } from "next/navigation";
+import { useForm, Controller } from "react-hook-form";
 
 const Login = () => {
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      username: "",
+      password: "",
+    },
+  });
   const router = useRouter();
 
-  const handleLogin = () => {
-    // Perform login logic here
+  // const handleLogin = () => {
+  //   // Perform login logic here
+  //   localStorage.setItem("isLoggedIn", "true");
+  //   router.push("/"); // Redirect to home page
+  // };
+
+  const onSubmit = (data) => {
+    console.log(data);
     localStorage.setItem("isLoggedIn", "true");
     router.push("/"); // Redirect to home page
+    console.log("hahaha");
   };
   return (
     <div>
@@ -19,16 +38,43 @@ const Login = () => {
           Login with username and password.
         </h1>
         <div className="mt-4 ">
-          <Input placeholder="Username" />
-          <Input placeholder="password" />
-          <div className="mt-4">
-            <Button
-              label="Login"
-              style="Primary"
-              customClassName="w-36 h-[40px]"
-              onClick={handleLogin}
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Controller
+              name="username"
+              control={control}
+              rules={{ required: "username is required" }}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  placeholder="enter username"
+                  label="Username"
+                  type="text"
+                  errorMessage={errors.username?.message}
+                />
+              )}
             />
-          </div>
+            <Controller
+              name="password"
+              control={control}
+              rules={{ required: "Password is required" }}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  placeholder="enter password"
+                  label="Password"
+                  type="password"
+                  errorMessage={errors.password?.message}
+                />
+              )}
+            />
+            <div className="mt-4">
+              <Button
+                label="Login"
+                style="Primary"
+                customClassName="w-36 h-[40px]"
+              />
+            </div>
+          </form>
         </div>
       </div>
     </div>

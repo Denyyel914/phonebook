@@ -4,7 +4,7 @@ const Input = forwardRef(
   (
     {
       label,
-      type = "text",
+      type,
       value,
       disabled,
       placeholder,
