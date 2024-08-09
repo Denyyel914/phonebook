@@ -27,7 +27,7 @@ const Modal = ({
         className={`bg-[#E7F3FC] rounded-lg shadow-lg ${
           size ? `max-w-${size}` : `max-w-lg `
         } px-5 `}
-        style={{ width: width }}
+        // style={{ width: width }}
       >
         <div className="flex justify-between items-center mb-3 border-b border-navOutline py-4 px-3">
           {title ? (

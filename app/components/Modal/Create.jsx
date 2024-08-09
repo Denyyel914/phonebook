@@ -34,101 +34,102 @@ const CreateModal = ({ isModalOpen, handleModal, closeModal }) => {
         onClose={closeModal}
         title="Add Contact"
         titleCustomClass={"text-2xl"}
-        size="xl"
-        width="35vw"
+        size="537px"
       >
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Controller
-            name="contactName"
-            control={control}
-            rules={{ required: "Contact name is required" }}
-            render={({ field }) => (
-              <Input
-                {...field}
-                placeholder="test title"
-                label="Contact name"
-                errorMessage={errors.contactName?.message}
-              />
-            )}
-          />
-          <div className="flex justify-between mt-5">
-            <div>
-              <Controller
-                name="areaCode"
-                control={control}
-                rules={{ required: "Contact name is required" }}
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    placeholder="test title"
-                    label="Area code"
-                    customClassName="w-[150px]"
-                    errorMessage={errors.areaCode?.message}
-                  />
-                )}
-              />
-            </div>
-            <div>
-              <Controller
-                name="phoneNumber"
-                control={control}
-                rules={{ required: "Contact name is required" }}
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    placeholder="test title"
-                    label="Phone number"
-                    errorMessage={errors.phoneNumber?.message}
-                  />
-                )}
-              />
-            </div>
-          </div>
-          <div className="mt-4">
+        <div className="w-[35vw]">
+          <form onSubmit={handleSubmit(onSubmit)}>
             <Controller
-              name="email"
+              name="contactName"
               control={control}
               rules={{ required: "Contact name is required" }}
               render={({ field }) => (
                 <Input
                   {...field}
                   placeholder="test title"
-                  label="Email"
-                  errorMessage={errors.email?.message}
+                  label="Contact name"
+                  errorMessage={errors.contactName?.message}
                 />
               )}
             />
-          </div>
-          <div className="mt-4">
-            <Controller
-              name="address"
-              control={control}
-              rules={{ required: "Contact name is required" }}
-              render={({ field }) => (
-                <Input
-                  {...field}
-                  placeholder="test title"
-                  label="Address"
-                  errorMessage={errors.address?.message}
+            <div className="flex justify-between mt-5">
+              <div>
+                <Controller
+                  name="areaCode"
+                  control={control}
+                  rules={{ required: "Contact name is required" }}
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      placeholder="test title"
+                      label="Area code"
+                      customClassName="w-[150px]"
+                      errorMessage={errors.areaCode?.message}
+                    />
+                  )}
                 />
-              )}
-            />
-          </div>
-          <div className="flex justify-end mt-7 pb-4">
-            <Button
-              label="Cancel"
-              customClassName="mr-2 w-[80px] h-[40px] text-[#0077D4]"
-              onClick={closeModal}
-            />
-            <Button
-              label="Create contact"
-              style="Primary"
-              customClassName="w-36 h-[40px]"
-              iconType="leading"
-              icon={<Image src={CheckCircle} alt="Check Circle" />}
-            />
-          </div>
-        </form>
+              </div>
+              <div>
+                <Controller
+                  name="phoneNumber"
+                  control={control}
+                  rules={{ required: "Contact name is required" }}
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      placeholder="test title"
+                      label="Phone number"
+                      errorMessage={errors.phoneNumber?.message}
+                    />
+                  )}
+                />
+              </div>
+            </div>
+            <div className="mt-4">
+              <Controller
+                name="email"
+                control={control}
+                rules={{ required: "Contact name is required" }}
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    placeholder="test title"
+                    label="Email"
+                    errorMessage={errors.email?.message}
+                  />
+                )}
+              />
+            </div>
+            <div className="mt-4">
+              <Controller
+                name="address"
+                control={control}
+                rules={{ required: "Contact name is required" }}
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    placeholder="test title"
+                    label="Address"
+                    errorMessage={errors.address?.message}
+                  />
+                )}
+              />
+            </div>
+            <div className="flex justify-end mt-7 pb-4">
+              <Button
+                label="Cancel"
+                customClassName="mr-2 w-[80px] h-[40px] text-[#0077D4]"
+                onClick={closeModal}
+              />
+              <Button
+                label="Create contact"
+                style="Primary"
+                customClassName="w-36 h-[40px]"
+                iconType="leading"
+                icon={<Image src={CheckCircle} alt="Check Circle" />}
+              />
+            </div>
+          </form>
+        </div>
       </Modal>
     </div>
   );
