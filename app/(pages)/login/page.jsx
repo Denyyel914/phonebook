@@ -4,7 +4,9 @@ import Input from "@/app/components/Input/Input";
 import Button from "@/app/components/Button/Button";
 import { useRouter } from "next/navigation";
 import { useForm, Controller } from "react-hook-form";
+// import { useMsal } from "@azure/msal-react";
 
+// const { instance } = useMsal();
 const Login = () => {
   const {
     control,
@@ -18,8 +20,11 @@ const Login = () => {
     },
   });
 
-  const onSubmit = (data) => {
+  const router = useRouter();
+
+  const handleLogin = (data) => {
     console.log(data);
+    router.push("/");
   };
   return (
     <div>
@@ -28,7 +33,7 @@ const Login = () => {
           Login with username and password.
         </h1>
         <div className="mt-4 ">
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(handleLogin)}>
             <Controller
               name="username"
               control={control}

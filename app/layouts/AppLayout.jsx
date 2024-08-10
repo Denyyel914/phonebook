@@ -2,10 +2,11 @@
 
 import { Inter } from "next/font/google";
 // import "./globals.css";
-import Header from "./layouts/Header/Index";
-import Sidebar from "./layouts/Sidebar/Index";
-import Footer from "./layouts/Footer/Index";
+import Header from "./Header/Index";
+import Sidebar from "./Sidebar/Index";
+import Footer from "./Footer/Index";
 import { useState } from "react";
+import App from "next/app";
 
 const AppLayout = ({ children }) => {
   const [isSidebarExpanded, setSidebarExpanded] = useState(false);

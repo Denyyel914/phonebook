@@ -1,7 +1,13 @@
-export default function Home() {
+import ProtectedRoute from "./msal/ProtectRoute";
+
+const Home = () => {
   return (
-    <div>
-      <p>test</p>
-    </div>
+    <ProtectedRoute>
+      <main>
+        <div>hahahahaha</div>
+      </main>
+    </ProtectedRoute>
   );
-}
+};
+
+export default Home;
