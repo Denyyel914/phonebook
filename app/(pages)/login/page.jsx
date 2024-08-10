@@ -7,7 +7,9 @@ import { useForm, Controller } from "react-hook-form";
 // import { useMsal } from "@azure/msal-react";
 
 // const { instance } = useMsal();
+
 const Login = () => {
+  const router = useRouter();
   const {
     control,
     handleSubmit,
@@ -20,19 +22,16 @@ const Login = () => {
     },
   });
 
-  const router = useRouter();
-
   const handleLogin = (data) => {
     console.log(data);
     router.push("/");
   };
   return (
     <div>
-      <div className="flex flex-col justify-center items-end h-[100vh]">
-        <h1 className="text-black text-center">
-          Login with username and password.
-        </h1>
-        <div className="mt-4 ">
+      {/* <div className="flex flex-col justify-center items-end h-[100vh]"> */}
+      <div className="flex flex-col justify-center items-center h-[100vh] mr-5">
+        <div className="">
+          <h1 className="text-black mb-5">Login with username and password.</h1>
           <form onSubmit={handleSubmit(handleLogin)}>
             <Controller
               name="username"
@@ -42,8 +41,8 @@ const Login = () => {
                 <Input
                   {...field}
                   placeholder="enter username"
-                  label="Username"
                   type="text"
+                  customClassName="mb-5 w-full"
                   errorMessage={errors.username?.message}
                 />
               )}
@@ -55,8 +54,8 @@ const Login = () => {
               render={({ field }) => (
                 <Input
                   {...field}
+                  customClassName="mb-5 w-full"
                   placeholder="enter password"
-                  label="Password"
                   type="password"
                   errorMessage={errors.password?.message}
                 />
@@ -66,7 +65,7 @@ const Login = () => {
               <Button
                 label="Login"
                 style="Primary"
-                customClassName="w-36 h-[40px]"
+                customClassName="w-24 h-[40px]"
               />
             </div>
           </form>

@@ -7,8 +7,10 @@ import Modal from "@/app/components/Modal/Modal";
 import CheckCircle from "@/app/assets/check_circle.svg";
 import Input from "@/app/components/Input/Input";
 import CreateModal from "@/app/components/Modal/Create";
+import { useRouter } from "next/navigation";
 
 const Header = ({ onToggleSidebar }) => {
+  const navigate = useRouter();
   const [isModalOpen, isSetModalOpen] = useState(false);
 
   const handleModal = () => {
@@ -17,6 +19,11 @@ const Header = ({ onToggleSidebar }) => {
 
   const closeModal = () => {
     isSetModalOpen(false);
+  };
+
+  const logout = () => {
+    localStorage.clear();
+    navigate.push("/login");
   };
 
   return (
@@ -41,6 +48,9 @@ const Header = ({ onToggleSidebar }) => {
             icon={<Image src={AddIcon} alt="Vercel Logo" />}
             onClick={handleModal}
           />
+          <div className="ml-3" onClick={logout}>
+            logout
+          </div>
           <div className=" ml-3">{isModalOpen}</div>
         </div>
       </nav>
