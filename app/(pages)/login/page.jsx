@@ -4,9 +4,9 @@ import Input from "@/app/components/Input/Input";
 import Button from "@/app/components/Button/Button";
 import { useRouter } from "next/navigation";
 import { useForm, Controller } from "react-hook-form";
-// import { useMsal } from "@azure/msal-react";
-
-// const { instance } = useMsal();
+import Logout from "../logout/page";
+import Image from "next/image";
+import Background from "../../assets/route_gb.jpg";
 
 const Login = () => {
   const router = useRouter();
@@ -26,23 +26,38 @@ const Login = () => {
     console.log(data);
     router.push("/");
   };
+
+  const routeToSignup = () => {
+    console.log("Sign up clicked");
+  };
+
   return (
-    <div>
-      {/* <div className="flex flex-col justify-center items-end h-[100vh]"> */}
-      <div className="flex flex-col justify-center items-end h-[100vh] mr-5">
-        <div className="">
-          <h1 className="text-black mb-5">Login with username and password.</h1>
+    <div className="flex h-screen">
+      {/* Left side with the full image */}
+      <div className="flex-1 relative">
+        <Image
+          src={Background}
+          layout="fill"
+          objectFit="cover"
+          alt="Background"
+        />
+      </div>
+
+      {/* Right side with the form */}
+      <div className="flex-1 flex flex-col justify-center items-center p-10 bg-white">
+        <div className="w-full max-w-md">
+          <h1 className="text-black mb-5 text-2xl font-semibold">Login</h1>
           <form onSubmit={handleSubmit(handleLogin)}>
             <Controller
               name="username"
               control={control}
-              rules={{ required: "username is required" }}
+              rules={{ required: "Username is required" }}
               render={({ field }) => (
                 <Input
                   {...field}
-                  placeholder="enter username"
+                  placeholder="Enter username"
                   type="text"
-                  customClassName="mb-2 w-full"
+                  customClassName="mb-4 w-full"
                   errorMessage={errors.username?.message}
                 />
               )}
@@ -54,8 +69,8 @@ const Login = () => {
               render={({ field }) => (
                 <Input
                   {...field}
-                  customClassName="mb-2 w-full"
-                  placeholder="enter password"
+                  customClassName="mb-4 w-full"
+                  placeholder="Enter password"
                   type="password"
                   errorMessage={errors.password?.message}
                 />
@@ -65,10 +80,19 @@ const Login = () => {
               <Button
                 label="Login"
                 style="Primary"
-                customClassName="w-24 h-[40px]"
+                customClassName="w-40 h-[40px]"
               />
             </div>
           </form>
+
+          <hr className="mt-5" />
+          <div className="mt-5">No Account?</div>
+          <Button
+            label="Sign up"
+            style="Primary"
+            customClassName="w-40 h-[40px] mt-2"
+            onClick={routeToSignup}
+          />
         </div>
       </div>
     </div>
