@@ -29,7 +29,7 @@ const Login = () => {
   return (
     <div>
       {/* <div className="flex flex-col justify-center items-end h-[100vh]"> */}
-      <div className="flex flex-col justify-center items-center h-[100vh] mr-5">
+      <div className="flex flex-col justify-center items-end h-[100vh] mr-5">
         <div className="">
           <h1 className="text-black mb-5">Login with username and password.</h1>
           <form onSubmit={handleSubmit(handleLogin)}>
@@ -42,7 +42,7 @@ const Login = () => {
                   {...field}
                   placeholder="enter username"
                   type="text"
-                  customClassName="mb-5 w-full"
+                  customClassName="mb-2 w-full"
                   errorMessage={errors.username?.message}
                 />
               )}
@@ -54,7 +54,7 @@ const Login = () => {
               render={({ field }) => (
                 <Input
                   {...field}
-                  customClassName="mb-5 w-full"
+                  customClassName="mb-2 w-full"
                   placeholder="enter password"
                   type="password"
                   errorMessage={errors.password?.message}
