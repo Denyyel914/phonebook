@@ -5,7 +5,7 @@ import Button from "@/app/components/Button/Button";
 import { useRouter } from "next/navigation";
 import { useForm, Controller } from "react-hook-form";
 
-const Logout = () => {
+const Signup = ({ setloggin }) => {
   const router = useRouter();
   const {
     control,
@@ -19,12 +19,13 @@ const Logout = () => {
     },
   });
 
-  const handleLogout = () => console.log("hahaha");
+  const handleSignup = () => console.log("hahaha");
+  const routeToLogin = () => setLoggin(true);
   return (
     <div>
       <h1>Create an Account</h1>
       <p>All fields are required</p>
-      <form onSubmit={handleSubmit(handleLogout)}>
+      <form onSubmit={handleSubmit(handleSignup)}>
         <Controller
           name="username"
           control={control}
@@ -58,6 +59,7 @@ const Logout = () => {
             label="Back to login"
             style="Secondary"
             customClassName="w-30 h-[40px] mr-2"
+            onClick={routeToLogin}
           />
           <Button
             label="Create account"
@@ -70,4 +72,4 @@ const Logout = () => {
   );
 };
 
-export default Logout;
+export default Signup;
