@@ -120,6 +120,7 @@ const Signup = () => {
                 style="Secondary"
                 customClassName="w-30 h-[40px] mr-2"
                 onClick={routeToLogin}
+                type="button"
               />
               <Button
                 label="Create account"

@@ -4,7 +4,7 @@ import Input from "@/app/components/Input/Input";
 import Button from "@/app/components/Button/Button";
 import { useRouter } from "next/navigation";
 import { useForm, Controller } from "react-hook-form";
-import Signup from "../signup/page";
+
 import Image from "next/image";
 import Background from "../../assets/route_gb.jpg";
 
