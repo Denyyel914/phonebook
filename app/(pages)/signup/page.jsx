@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useForm, Controller } from "react-hook-form";
 import Image from "next/image";
 import Background from "../../assets/route_gb.jpg";
-
+import arrowback from "@/app/assets/pagination/arrow_back.svg";
 const Signup = () => {
   const router = useRouter();
   const {
@@ -114,12 +114,13 @@ const Signup = () => {
               )}
             />
 
-            <div className="mt-4">
+            <div className="flex  mt-3 ">
               <Button
                 label="Back to login"
-                style="Secondary"
-                customClassName="w-30 h-[40px] mr-2"
+                customClassName="w-30 h-[40px] mr-2 text-[#0077D4]"
                 onClick={routeToLogin}
+                iconType="leading"
+                icon={<Image src={arrowback} alt="Vercel Logo" />}
                 type="button"
               />
               <Button
