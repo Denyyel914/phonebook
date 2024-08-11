@@ -39,10 +39,38 @@ const Signup = () => {
       <div className="flex-1 flex flex-col justify-center items-center p-10 bg-white">
         <div className="w-full max-w-md">
           <h1 className="text-black mb-5 text-2xl font-semibold">
-            Create Account
+            Create an account
           </h1>
-          <p>All fields are required</p>
+          <p className="mb-3">All fields are required</p>
           <form onSubmit={handleSubmit(handleSignup)}>
+            <Controller
+              name="firstName"
+              control={control}
+              rules={{ required: "Firstname is required" }}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  placeholder="Firstname"
+                  type="text"
+                  customClassName="mb-4 w-full"
+                  errorMessage={errors.firstName?.message}
+                />
+              )}
+            />
+            <Controller
+              name="lastName"
+              control={control}
+              rules={{ required: "lastname is required" }}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  placeholder="Lastname"
+                  type="text"
+                  customClassName="mb-4 w-full"
+                  errorMessage={errors.lastName?.message}
+                />
+              )}
+            />
             <Controller
               name="username"
               control={control}
@@ -50,9 +78,9 @@ const Signup = () => {
               render={({ field }) => (
                 <Input
                   {...field}
-                  placeholder="Enter username"
-                  type="text"
                   customClassName="mb-4 w-full"
+                  placeholder="Username"
+                  type="text"
                   errorMessage={errors.username?.message}
                 />
               )}
@@ -65,12 +93,27 @@ const Signup = () => {
                 <Input
                   {...field}
                   customClassName="mb-4 w-full"
-                  placeholder="Enter password"
+                  placeholder="Password"
                   type="password"
                   errorMessage={errors.password?.message}
                 />
               )}
             />
+            <Controller
+              name="confirmPassword"
+              control={control}
+              rules={{ required: "Confirm Password is required" }}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  customClassName="mb-4 w-full"
+                  placeholder="Confirm Password"
+                  type="password"
+                  errorMessage={errors.confirmPassword?.message}
+                />
+              )}
+            />
+
             <div className="mt-4">
               <Button
                 label="Back to login"

@@ -53,7 +53,13 @@ const Login = () => {
             <Controller
               name="username"
               control={control}
-              rules={{ required: "Username is required" }}
+              rules={{
+                required: "Username is required",
+                pattern: {
+                  value: /\S+@\S+\.\S+/,
+                  message: "Entered value does not match email format",
+                },
+              }}
               render={({ field }) => (
                 <Input
                   {...field}
