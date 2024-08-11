@@ -9,8 +9,6 @@ import Image from "next/image";
 import Background from "../../assets/route_gb.jpg";
 
 const Login = () => {
-  const [loggin, setLoggin] = useState(true);
-
   const router = useRouter();
   const navigate = useRouter();
   const {
@@ -31,8 +29,8 @@ const Login = () => {
   };
 
   const routeToSignup = () => {
-    setLoggin(false);
-    // navigate.push("/signup");
+    // setLoggin(false);
+    navigate.push("/signup");
   };
 
   return (
@@ -50,65 +48,53 @@ const Login = () => {
       {/* Right side with the form */}
       <div className="flex-1 flex flex-col justify-center items-center p-10 bg-white">
         <div className="w-full max-w-md">
-          {loggin ? (
-            <>
-              <h1 className="text-black mb-5 text-2xl font-semibold">Login</h1>
-              <form onSubmit={handleSubmit(handleLogin)}>
-                <Controller
-                  name="username"
-                  control={control}
-                  rules={{ required: "Username is required" }}
-                  render={({ field }) => (
-                    <Input
-                      {...field}
-                      placeholder="Enter username"
-                      type="text"
-                      customClassName="mb-4 w-full"
-                      errorMessage={errors.username?.message}
-                    />
-                  )}
+          <h1 className="text-black mb-5 text-2xl font-semibold">Login</h1>
+          <form onSubmit={handleSubmit(handleLogin)}>
+            <Controller
+              name="username"
+              control={control}
+              rules={{ required: "Username is required" }}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  placeholder="Enter username"
+                  type="text"
+                  customClassName="mb-4 w-full"
+                  errorMessage={errors.username?.message}
                 />
-                <Controller
-                  name="password"
-                  control={control}
-                  rules={{ required: "Password is required" }}
-                  render={({ field }) => (
-                    <Input
-                      {...field}
-                      customClassName="mb-4 w-full"
-                      placeholder="Enter password"
-                      type="password"
-                      errorMessage={errors.password?.message}
-                    />
-                  )}
+              )}
+            />
+            <Controller
+              name="password"
+              control={control}
+              rules={{ required: "Password is required" }}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  customClassName="mb-4 w-full"
+                  placeholder="Enter password"
+                  type="password"
+                  errorMessage={errors.password?.message}
                 />
-                <div className="mt-4">
-                  <Button
-                    label="Login"
-                    style="Primary"
-                    customClassName="w-40 h-[40px]"
-                  />
-                </div>
-              </form>
-            </>
-          ) : (
-            <Signup setLoggin={setLoggin} />
-          )}
-
-          {loggin ? (
-            <div>
-              <hr className="mt-5" />
-              <div className="mt-5">No Account?</div>
+              )}
+            />
+            <div className="mt-4">
               <Button
-                label="Sign up"
+                label="Login"
                 style="Primary"
-                customClassName="w-40 h-[40px] mt-2"
-                onClick={routeToSignup}
+                customClassName="w-40 h-[40px]"
               />
             </div>
-          ) : (
-            <h1>hahahaha</h1>
-          )}
+          </form>
+
+          <hr className="mt-5" />
+          <div className="mt-5">No Account?</div>
+          <Button
+            label="Sign up"
+            style="Primary"
+            customClassName="w-40 h-[40px] mt-2"
+            onClick={routeToSignup}
+          />
         </div>
       </div>
     </div>
