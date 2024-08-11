@@ -56,11 +56,11 @@ const CreateModal = ({ isModalOpen, handleModal, closeModal }) => {
                 <Controller
                   name="areaCode"
                   control={control}
-                  rules={{ required: "Contact name is required" }}
+                  rules={{ required: "Area code is required" }}
                   render={({ field }) => (
                     <Input
                       {...field}
-                      placeholder="test title"
+                      placeholder="Area code"
                       label="Area code"
                       customClassName="w-[150px]"
                       errorMessage={errors.areaCode?.message}
@@ -68,22 +68,24 @@ const CreateModal = ({ isModalOpen, handleModal, closeModal }) => {
                   )}
                 />
               </div>
-              <div>
+              <div className="flex-grow ml-4">
                 <Controller
                   name="phoneNumber"
                   control={control}
-                  rules={{ required: "Contact name is required" }}
+                  rules={{ required: "Phone number is required" }}
                   render={({ field }) => (
                     <Input
                       {...field}
-                      placeholder="test title"
+                      placeholder="Phone number"
                       label="Phone number"
+                      customClassName="w-full"
                       errorMessage={errors.phoneNumber?.message}
                     />
                   )}
                 />
               </div>
             </div>
+
             <div className="mt-4">
               <Controller
                 name="email"
