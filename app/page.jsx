@@ -39,6 +39,24 @@ const Home = () => {
     console.log(dataTable);
   }, []);
 
+  const columns = [
+    {
+      Header: "ID",
+      accessorKey: "id",
+    },
+    {
+      Header: "Contact Name",
+      accessorKey: "title",
+    },
+    {
+      Header: "Phone Number",
+      accessorKey: "body",
+    },
+    // {
+    //   Header: "Action",
+    // },
+  ];
+
   // useEffect(() => {
   //   console.log(dataTable); // This effect runs whenever dataTable changes
   // }, [dataTable]);
@@ -46,9 +64,9 @@ const Home = () => {
   return (
     <ProtectedRoute>
       <main>
-        {dataTable && dataTable.length}
-        <div>hahahahaha</div>
-        <Table />
+        {/* {dataTable && dataTable.length} */}
+        {/* <div>hahahahaha</div> */}
+        <Table columns={columns} data={dataTable} />
       </main>
     </ProtectedRoute>
   );
