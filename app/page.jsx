@@ -4,40 +4,28 @@ import { useEffect, useState } from "react";
 import ProtectedRoute from "./msal/ProtectRoute";
 import Table from "./components/Table/Table";
 import axios from "axios";
+import EditModal from "./components/Modal/EditModal";
+import tableData from "@/app/data/MOCK_DATA.json";
 
 const Home = () => {
-  const [dataTable, setDataTable] = useState([]);
-
-  // const getApi = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       "https://jsonplaceholder.typicode.com/posts"
-  //     );
-  //     setDataTable(response.data);
-  //   } catch (error) {
-  //     console.error("Error fetching data:", error);
-  //   }
-  // };
+  // const [dataTable, setDataTable] = useState([]);
+  const [isEditModal, setIsEditModal] = useState(false);
+  const [editData, setEditData] = useState([]);
 
   // useEffect(() => {
+  //   const getApi = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         "https://jsonplaceholder.typicode.com/posts"
+  //       );
+  //       setDataTable(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
   //   getApi();
   //   console.log(dataTable);
   // }, []);
-
-  useEffect(() => {
-    const getApi = async () => {
-      try {
-        const response = await axios.get(
-          "https://jsonplaceholder.typicode.com/posts"
-        );
-        setDataTable(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    getApi();
-    console.log(dataTable);
-  }, []);
 
   const columns = [
     {
@@ -46,28 +34,52 @@ const Home = () => {
     },
     {
       Header: "Contact Name",
-      accessorKey: "title",
+      accessorKey: "contact_name",
+    },
+    {
+      Header: "Area Code",
+      accessorKey: "area_code",
     },
     {
       Header: "Phone Number",
-      accessorKey: "body",
+      accessorKey: "phone_number",
+    },
+    {
+      Header: "Email",
+      accessorKey: "email",
+    },
+    {
+      Header: "Address",
+      accessorKey: "address",
     },
     // {
     //   Header: "Action",
     // },
   ];
 
-  // useEffect(() => {
-  //   console.log(dataTable); // This effect runs whenever dataTable changes
-  // }, [dataTable]);
+  const handleEdit = (rowData) => {
+    console.log(rowData);
+    setEditData(rowData);
+    setIsEditModal(true);
+  };
 
+  const closeModal = () => setIsEditModal(false);
+  const handleDelete = (id) => console.log(dataTable[id]);
   return (
     <ProtectedRoute>
       <main>
-        {/* {dataTable && dataTable.length} */}
-        {/* <div>hahahahaha</div> */}
-        <Table columns={columns} data={dataTable} />
+        <Table
+          columns={columns}
+          data={tableData}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+        />
       </main>
+      <EditModal
+        isModalOpen={isEditModal}
+        closeModal={closeModal}
+        editData={editData}
+      />
     </ProtectedRoute>
   );
 };
