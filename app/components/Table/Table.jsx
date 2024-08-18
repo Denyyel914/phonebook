@@ -8,7 +8,7 @@ import Input from "../Input/Input";
 import Pagination from "@/app/components/Pagination/Pagination";
 import Image from "next/image";
 import editIcon from "@/app/assets/table/edit.svg";
-import deleteIcon from "@/app/assets/table/delete.svg";
+import deleteIcon from "@/app/assets/button-delete.svg";
 
 const Table = ({ columns, data, onEdit, onDelete }) => {
   const [search, setSearch] = useState("");
@@ -22,6 +22,7 @@ const Table = ({ columns, data, onEdit, onDelete }) => {
   });
   const handleChange = (e) => {
     console.log(e.target.value);
+    setSearch(e.target.value);
   };
   return (
     <div>

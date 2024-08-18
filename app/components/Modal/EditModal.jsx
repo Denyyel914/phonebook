@@ -11,6 +11,7 @@ const EditModal = ({ isModalOpen, closeModal, editData }) => {
   const {
     control,
     handleSubmit,
+    watch,
     reset,
     formState: { errors },
   } = useForm({
@@ -23,16 +24,31 @@ const EditModal = ({ isModalOpen, closeModal, editData }) => {
     },
   });
 
+  // const formValues = watch();
+
+  // useEffect(() => {
+  //   console.log("Form values changed:", formValues);
+  //   console.log("Edit data:", editData);
+  // }, [formValues, editData]);
+
+  useEffect(() => {
+    if (editData) {
+      reset({
+        contactName: editData.contact_name || "",
+        areaCode: editData.area_code || "",
+        phoneNumber: editData.phone_number || "",
+        email: editData.email || "",
+        address: editData.address || "",
+      });
+      console.log("Edit data updated:", editData);
+    }
+  }, [editData, reset]);
+
   const onSubmit = (data) => {
     console.log(data);
     reset();
   };
 
-  useEffect(() => {
-    if (editData) {
-      console.log("Edit Data:", editData);
-    }
-  }, [editData]);
   return (
     <div>
       {/* {editData} */}

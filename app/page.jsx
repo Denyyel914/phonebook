@@ -38,22 +38,22 @@ const Home = () => {
       Header: "Contact Name",
       accessorKey: "contact_name",
     },
-    {
-      Header: "Area Code",
-      accessorKey: "area_code",
-    },
+    // {
+    //   Header: "Area Code",
+    //   accessorKey: "area_code",
+    // },
     {
       Header: "Phone Number",
       accessorKey: "phone_number",
     },
-    {
-      Header: "Email",
-      accessorKey: "email",
-    },
-    {
-      Header: "Address",
-      accessorKey: "address",
-    },
+    // {
+    //   Header: "Email",
+    //   accessorKey: "email",
+    // },
+    // {
+    //   Header: "Address",
+    //   accessorKey: "address",
+    // },
     // {
     //   Header: "Action",
     // },
