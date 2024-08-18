@@ -50,7 +50,7 @@ const Table = ({ columns, data, onEdit, onDelete }) => {
                 className="py-3 px-4  text-left p-2 border-b  text-black-700 font-medium text-sm text-nowrap uppercase"
               >
                 {flexRender(
-                  header.column.columnDef.header,
+                  header.column.columnDef.Header,
                   header.getContext()
                 )}
               </th>
@@ -85,7 +85,7 @@ const Table = ({ columns, data, onEdit, onDelete }) => {
                   <Image
                     src={deleteIcon}
                     alt="Check Circle"
-                    onClick={() => onDelete(row.id)}
+                    onClick={() => onDelete(row.original)}
                   />
                 </div>
               </td>

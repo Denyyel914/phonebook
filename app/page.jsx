@@ -5,11 +5,13 @@ import ProtectedRoute from "./msal/ProtectRoute";
 import Table from "./components/Table/Table";
 import axios from "axios";
 import EditModal from "./components/Modal/EditModal";
+import DeleteModal from "./components/Modal/DeleteModal";
 import tableData from "@/app/data/MOCK_DATA.json";
 
 const Home = () => {
   // const [dataTable, setDataTable] = useState([]);
   const [isEditModal, setIsEditModal] = useState(false);
+  const [isDeleteModal, setIsDeleteModal] = useState(false);
   const [editData, setEditData] = useState([]);
 
   // useEffect(() => {
@@ -64,7 +66,11 @@ const Home = () => {
   };
 
   const closeModal = () => setIsEditModal(false);
-  const handleDelete = (id) => console.log(dataTable[id]);
+  const closeDeleteModal = () => setIsDeleteModal(false);
+  const handleDelete = (rowData) => {
+    console.log(rowData);
+    setIsDeleteModal(true);
+  };
   return (
     <ProtectedRoute>
       <main>
@@ -80,6 +86,7 @@ const Home = () => {
         closeModal={closeModal}
         editData={editData}
       />
+      <DeleteModal isModalOpen={isDeleteModal} closeModal={closeDeleteModal} />
     </ProtectedRoute>
   );
 };
