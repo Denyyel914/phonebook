@@ -51,7 +51,6 @@ const EditModal = ({ isModalOpen, closeModal, editData }) => {
 
   return (
     <div>
-      {/* {editData} */}
       <Modal
         isOpen={isModalOpen}
         onClose={closeModal}
