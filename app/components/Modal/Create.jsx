@@ -5,7 +5,7 @@ import Image from "next/image";
 import CheckCircle from "@/app/assets/check_circle.svg";
 import Input from "../Input/Input";
 import { useForm, Controller } from "react-hook-form";
-
+import { showToast } from "../Toastify/Toastify";
 const CreateModal = ({ isModalOpen, handleModal, closeModal }) => {
   const {
     control,
@@ -24,6 +24,7 @@ const CreateModal = ({ isModalOpen, handleModal, closeModal }) => {
 
   const onSubmit = (data) => {
     console.log(data);
+    showToast("This is a success message!", "success");
     reset();
   };
 

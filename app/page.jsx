@@ -7,6 +7,7 @@ import axios from "axios";
 import EditModal from "./components/Modal/EditModal";
 import DeleteModal from "./components/Modal/DeleteModal";
 import tableData from "@/app/data/MOCK_DATA.json";
+import ToastNotification from "./components/Toastify/Toastify";
 
 const Home = () => {
   const [dataTable, setDataTable] = useState(tableData);
@@ -69,6 +70,7 @@ const Home = () => {
   return (
     <ProtectedRoute>
       <main>
+        <ToastNotification />
         <Table
           columns={columns}
           data={dataTable}
