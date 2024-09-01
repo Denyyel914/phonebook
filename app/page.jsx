@@ -8,6 +8,7 @@ import EditModal from "./components/Modal/EditModal";
 import DeleteModal from "./components/Modal/DeleteModal";
 import tableData from "@/app/data/MOCK_DATA.json";
 import ToastNotification from "./components/Toastify/Toastify";
+import { showToast } from "./components/Toastify/Toastify";
 
 const Home = () => {
   const [dataTable, setDataTable] = useState(tableData);
@@ -66,6 +67,10 @@ const Home = () => {
       setDataTable(updatedData);
     }
     setIsDeleteModal(false);
+    showToast("Data deleted!", "info", {
+      theme: "dark",
+      icon: false,
+    });
   };
   return (
     <ProtectedRoute>
