@@ -56,12 +56,6 @@ const Table = ({ columns, data, onEdit, onDelete }) => {
                 )}
               </th>
             ))}
-            <th
-              key={"action-header"}
-              className="py-3 px-4  text-left p-2 border-b  text-black-700 font-medium text-sm text-nowrap uppercase"
-            >
-              Action
-            </th>
           </tr>
         ))}
 
