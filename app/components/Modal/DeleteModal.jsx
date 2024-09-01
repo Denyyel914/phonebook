@@ -5,7 +5,7 @@ import Image from "next/image";
 import saveIcon from "@/app/assets/save.svg";
 import deleteIcon from "@/app/assets/delete.svg";
 
-const DeleteModal = ({ isModalOpen, closeModal, editData }) => {
+const DeleteModal = ({ isModalOpen, closeModal, deleteConfirmation }) => {
   return (
     <div>
       <Modal
@@ -26,7 +26,7 @@ const DeleteModal = ({ isModalOpen, closeModal, editData }) => {
             <Button
               label="Delete"
               customClassName="mr-2 w-[90px] h-[40px] bg-[#D4000D] text-white"
-              onClick={closeModal}
+              onClick={deleteConfirmation}
               iconType="leading"
               icon={<Image src={deleteIcon} alt="Delete Icon" />}
             />

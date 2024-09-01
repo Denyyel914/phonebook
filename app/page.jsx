@@ -9,10 +9,11 @@ import DeleteModal from "./components/Modal/DeleteModal";
 import tableData from "@/app/data/MOCK_DATA.json";
 
 const Home = () => {
-  // const [dataTable, setDataTable] = useState([]);
+  const [dataTable, setDataTable] = useState(tableData);
   const [isEditModal, setIsEditModal] = useState(false);
   const [isDeleteModal, setIsDeleteModal] = useState(false);
   const [editData, setEditData] = useState([]);
+  const [deleteData, setDeleteData] = useState();
 
   // useEffect(() => {
   //   const getApi = async () => {
@@ -52,18 +53,27 @@ const Home = () => {
 
   const closeModal = () => setIsEditModal(false);
   const closeDeleteModal = () => setIsDeleteModal(false);
-  const handleDelete = (rowData) => {
-    console.log(rowData);
+
+  const handleDeleteModal = (rowData) => {
     setIsDeleteModal(true);
+    setDeleteData(rowData);
+  };
+
+  const deleteConfirmation = () => {
+    if (deleteData) {
+      const updatedData = tableData.filter((item) => item.id !== deleteData.id);
+      setDataTable(updatedData);
+    }
+    setIsDeleteModal(false);
   };
   return (
     <ProtectedRoute>
       <main>
         <Table
           columns={columns}
-          data={tableData}
+          data={dataTable}
           onEdit={handleEdit}
-          onDelete={handleDelete}
+          onDelete={handleDeleteModal}
         />
       </main>
       <EditModal
@@ -71,7 +81,11 @@ const Home = () => {
         closeModal={closeModal}
         editData={editData}
       />
-      <DeleteModal isModalOpen={isDeleteModal} closeModal={closeDeleteModal} />
+      <DeleteModal
+        isModalOpen={isDeleteModal}
+        closeModal={closeDeleteModal}
+        deleteConfirmation={deleteConfirmation}
+      />
     </ProtectedRoute>
   );
 };
