@@ -25,7 +25,7 @@ const CreateModal = ({ isModalOpen, handleModal, closeModal }) => {
   const onSubmit = (data) => {
     console.log(data);
     showToast("This is a success message!", "success");
-    reset();
+    // reset();
   };
 
   return (

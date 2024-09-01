@@ -8,12 +8,13 @@ const ToastNotification = () => {
 
 export const showToast = (message, type = "default", options = {}) => {
   const config = {
-    position: "bottm-left",
-    autoClose: 3000,
-    hideProgressBar: false,
+    position: "bottom-left",
+    autoClose: 2000,
+    hideProgressBar: true,
     closeOnClick: true,
     pauseOnHover: true,
     draggable: true,
+    theme: "colored",
     ...options,
   };
 
