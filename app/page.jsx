@@ -59,6 +59,7 @@ const Home = () => {
   const handleDeleteModal = (rowData) => {
     setIsDeleteModal(true);
     setDeleteData(rowData);
+    console.log(rowData);
   };
 
   const deleteConfirmation = () => {

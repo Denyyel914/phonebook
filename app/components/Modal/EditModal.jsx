@@ -6,8 +6,10 @@ import saveIcon from "@/app/assets/save.svg";
 import deleteIcon from "@/app/assets/delete.svg";
 import Input from "../Input/Input";
 import { useForm, Controller } from "react-hook-form";
+import tableData from "@/app/data/MOCK_DATA.json";
 
 const EditModal = ({ isModalOpen, closeModal, editData }) => {
+  const [dataTable, setDataTable] = useState(tableData);
   const {
     control,
     handleSubmit,
@@ -34,6 +36,7 @@ const EditModal = ({ isModalOpen, closeModal, editData }) => {
   useEffect(() => {
     if (editData) {
       reset({
+        id: editData.id,
         contactName: editData.contact_name || "",
         areaCode: editData.area_code || "",
         phoneNumber: editData.phone_number || "",
@@ -44,6 +47,11 @@ const EditModal = ({ isModalOpen, closeModal, editData }) => {
     }
   }, [editData, reset]);
 
+  const onDelete = () => {
+    console.log(editData);
+    console.log(dataTable);
+    // const updatedData = tableData.filter((item) => item.id !== deleteData.id);
+  };
   const onSubmit = (data) => {
     console.log(data);
     reset();
@@ -143,7 +151,7 @@ const EditModal = ({ isModalOpen, closeModal, editData }) => {
                 <Button
                   label="Delete"
                   customClassName="mr-2 w-[90px] h-[40px] bg-[#D4000D] text-white"
-                  onClick={closeModal}
+                  onClick={onDelete}
                   iconType="leading"
                   icon={<Image src={deleteIcon} alt="Check Circle" />}
                 />
