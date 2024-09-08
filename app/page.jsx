@@ -74,15 +74,23 @@ const Home = () => {
     });
   };
 
-  const deleteContact = (data) => {
-    console.log(data);
-    const updatedData = tableData.filter((item) => item.id !== data.id);
-    setDataTable(updatedData);
+  // const deleteContact = (data) => {
+  //   console.log(data);
+  //   const updatedData = tableData.filter((item) => item.id !== data.id);
+  //   setDataTable(updatedData);
+  //   setIsEditModal(false);
+  //   showToast("Data deleted!", "info", {
+  //     theme: "dark",
+  //     icon: false,
+  //   });
+  // };
+
+  const handleDeleteFromEditModal = (contact) => {
+    console.log(contact);
+
+    setDeleteData(contact);
+    setIsDeleteModal(true);
     setIsEditModal(false);
-    showToast("Data deleted!", "info", {
-      theme: "dark",
-      icon: false,
-    });
   };
   return (
     <ProtectedRoute>
@@ -99,7 +107,7 @@ const Home = () => {
         isModalOpen={isEditModal}
         closeModal={closeModal}
         editData={editData}
-        deleteFunction={deleteContact}
+        deleteFunction={handleDeleteFromEditModal}
       />
       <DeleteModal
         isModalOpen={isDeleteModal}
