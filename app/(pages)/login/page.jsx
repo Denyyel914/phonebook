@@ -65,7 +65,7 @@ const Login = () => {
                   {...field}
                   placeholder="Enter username"
                   type="text"
-                  customClassName="mb-4 w-full"
+                  customClassName="mb-3 w-full"
                   errorMessage={errors.username?.message}
                 />
               )}
@@ -77,7 +77,7 @@ const Login = () => {
               render={({ field }) => (
                 <Input
                   {...field}
-                  customClassName="mb-4 w-full"
+                  customClassName="mb-3 w-full"
                   placeholder="Enter password"
                   type="password"
                   errorMessage={errors.password?.message}

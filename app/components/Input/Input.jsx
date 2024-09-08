@@ -56,7 +56,7 @@ const Input = forwardRef(
             }}
           />
           {errorMessage && (
-            <span role="alert" className="text-red-500">
+            <span role="alert" className="text-red-500 mb-2">
               {errorMessage}
             </span>
           )}
