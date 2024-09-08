@@ -7,12 +7,15 @@ import { useForm, Controller } from "react-hook-form";
 import Image from "next/image";
 import Background from "../../assets/route_gb.jpg";
 import arrowback from "@/app/assets/pagination/arrow_back.svg";
+import { showToast } from "@/app/components/Toastify/Toastify";
+import ToastNotification from "@/app/components/Toastify/Toastify";
 const Signup = () => {
   const router = useRouter();
   const {
     control,
     handleSubmit,
     reset,
+    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -21,10 +24,23 @@ const Signup = () => {
     },
   });
 
-  const handleSignup = () => console.log("hahaha");
+  const password = watch("password");
+
+  const handleSignup = (data) => {
+    console.log(data);
+    // if (data.password !== data.confirmPassword) {
+    //   console.log("hahaha");
+    //   showToast("Username and password is not match!", "error", {
+    //     icon: false,
+    //   });
+    // } else {
+    //   console.log("oks");
+    // }
+  };
   const routeToLogin = () => router.push("/login");
   return (
     <div className="flex h-screen">
+      <ToastNotification />
       {/* Left side with the full image */}
       <div className="flex-1 relative">
         <Image
@@ -102,7 +118,12 @@ const Signup = () => {
             <Controller
               name="confirmPassword"
               control={control}
-              rules={{ required: "Confirm Password is required" }}
+              rules={{
+                required: "Confirm Password is required",
+                validate: (value) =>
+                  value === password ||
+                  "Password and confirm password do not match",
+              }}
               render={({ field }) => (
                 <Input
                   {...field}
