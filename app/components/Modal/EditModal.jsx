@@ -8,7 +8,7 @@ import Input from "../Input/Input";
 import { useForm, Controller } from "react-hook-form";
 import tableData from "@/app/data/MOCK_DATA.json";
 
-const EditModal = ({ isModalOpen, closeModal, editData }) => {
+const EditModal = ({ isModalOpen, closeModal, editData, deleteFunction }) => {
   const [dataTable, setDataTable] = useState(tableData);
   const {
     control,
@@ -53,7 +53,7 @@ const EditModal = ({ isModalOpen, closeModal, editData }) => {
     // const updatedData = tableData.filter((item) => item.id !== deleteData.id);
   };
   const onSubmit = (data) => {
-    console.log(data);
+    console.log(data, "submit");
     reset();
   };
 
@@ -62,7 +62,7 @@ const EditModal = ({ isModalOpen, closeModal, editData }) => {
       <Modal
         isOpen={isModalOpen}
         onClose={closeModal}
-        title="Add Contact"
+        title="Edit Contact"
         titleCustomClass={"text-2xl"}
         size="537px"
       >
@@ -150,8 +150,9 @@ const EditModal = ({ isModalOpen, closeModal, editData }) => {
               <div>
                 <Button
                   label="Delete"
+                  type="button"
                   customClassName="mr-2 w-[90px] h-[40px] bg-[#D4000D] text-white"
-                  onClick={onDelete}
+                  onClick={() => deleteFunction(editData)}
                   iconType="leading"
                   icon={<Image src={deleteIcon} alt="Check Circle" />}
                 />

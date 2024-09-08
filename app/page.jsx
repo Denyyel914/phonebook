@@ -59,7 +59,7 @@ const Home = () => {
   const handleDeleteModal = (rowData) => {
     setIsDeleteModal(true);
     setDeleteData(rowData);
-    console.log(rowData);
+    console.log(rowData, "test");
   };
 
   const deleteConfirmation = () => {
@@ -68,6 +68,17 @@ const Home = () => {
       setDataTable(updatedData);
     }
     setIsDeleteModal(false);
+    showToast("Data deleted!", "info", {
+      theme: "dark",
+      icon: false,
+    });
+  };
+
+  const deleteContact = (data) => {
+    console.log(data);
+    const updatedData = tableData.filter((item) => item.id !== data.id);
+    setDataTable(updatedData);
+    setIsEditModal(false);
     showToast("Data deleted!", "info", {
       theme: "dark",
       icon: false,
@@ -88,6 +99,7 @@ const Home = () => {
         isModalOpen={isEditModal}
         closeModal={closeModal}
         editData={editData}
+        deleteFunction={deleteContact}
       />
       <DeleteModal
         isModalOpen={isDeleteModal}
