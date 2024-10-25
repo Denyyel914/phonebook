@@ -70,7 +70,7 @@ const Table = ({ columns, data, onEdit, onDelete }) => {
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
-              <td className="p-2 border-b border-[#C3C6CF] text-[#1A1C1E] font-normal text-sm text-clip">
+              <td className="p-2 border-b border-[#C3C6CF] text-[#1A1C1E] font-normal text-sm  text-clip">
                 <div className="flex">
                   <Image
                     src={editIcon}

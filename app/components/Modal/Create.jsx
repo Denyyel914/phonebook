@@ -6,6 +6,7 @@ import CheckCircle from "@/app/assets/check_circle.svg";
 import Input from "../Input/Input";
 import { useForm, Controller } from "react-hook-form";
 import { showToast } from "../Toastify/Toastify";
+
 const CreateModal = ({ isModalOpen, handleModal, closeModal }) => {
   const {
     control,
@@ -14,18 +15,31 @@ const CreateModal = ({ isModalOpen, handleModal, closeModal }) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      contactName: "",
-      areaCode: "",
-      phoneNumber: "",
+      contact_name: "",
+      area_code: "",
+      phone_number: "",
       email: "",
       address: "",
     },
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
+
+    const response = await fetch("/api/create/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const result = await response.json();
+    console.log("Response:", result);
+
     showToast("This is a success message!", "success");
-    // reset();
+    reset();
+    closeModal();
   };
 
   return (
@@ -40,7 +54,7 @@ const CreateModal = ({ isModalOpen, handleModal, closeModal }) => {
         <div className="w-[35vw]">
           <form onSubmit={handleSubmit(onSubmit)}>
             <Controller
-              name="contactName"
+              name="contact_name"
               control={control}
               rules={{ required: "Contact name is required" }}
               render={({ field }) => (
@@ -55,7 +69,7 @@ const CreateModal = ({ isModalOpen, handleModal, closeModal }) => {
             <div className="flex justify-between mt-5">
               <div>
                 <Controller
-                  name="areaCode"
+                  name="area_code"
                   control={control}
                   rules={{ required: "Area code is required" }}
                   render={({ field }) => (
@@ -64,14 +78,14 @@ const CreateModal = ({ isModalOpen, handleModal, closeModal }) => {
                       placeholder="Area code"
                       label="Area code"
                       customClassName="w-[150px]"
-                      errorMessage={errors.areaCode?.message}
+                      errorMessage={errors.area_code?.message}
                     />
                   )}
                 />
               </div>
               <div className="flex-grow ml-4">
                 <Controller
-                  name="phoneNumber"
+                  name="phone_number"
                   control={control}
                   rules={{ required: "Phone number is required" }}
                   render={({ field }) => (
@@ -80,7 +94,7 @@ const CreateModal = ({ isModalOpen, handleModal, closeModal }) => {
                       placeholder="Phone number"
                       label="Phone number"
                       customClassName="w-full"
-                      errorMessage={errors.phoneNumber?.message}
+                      errorMessage={errors.phone_number?.message}
                     />
                   )}
                 />

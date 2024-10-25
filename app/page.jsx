@@ -46,6 +46,10 @@ const Home = () => {
       Header: "Phone Number",
       accessorKey: "phone_number",
     },
+    // {
+    //   Header: "Action",
+    //   accessorKey: "action",
+    // },
   ];
 
   const handleEdit = (rowData) => {

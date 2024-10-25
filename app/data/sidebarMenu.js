@@ -7,12 +7,12 @@ const sidebarMenu = [
     icon: Home,
     route: "/",
   },
-  // {
-  //   id: 2,
-  //   name: "dashboard",
-  //   icon: Home,
-  //   route: "/dashboard",
-  // },
+  {
+    id: 2,
+    name: "dashboard",
+    icon: Home,
+    route: "/dashboard",
+  },
 
   // {
   //     id: 3,
