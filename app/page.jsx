@@ -12,6 +12,7 @@ import { showToast } from "./components/Toastify/Toastify";
 
 const Home = () => {
   const [dataTable, setDataTable] = useState(tableData);
+  const [contact, setContact] = useState([]);
   const [isEditModal, setIsEditModal] = useState(false);
   const [isDeleteModal, setIsDeleteModal] = useState(false);
   const [editData, setEditData] = useState([]);
@@ -31,6 +32,34 @@ const Home = () => {
   //   getApi();
   //   console.log(dataTable);
   // }, []);
+
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     try {
+  //       const response = await axios.get("/api/read/");
+  //       setContact(response.data);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+
+  //   getData();
+  // }, []);
+
+  useEffect(() => {
+    const getData = async () => {
+      await axios
+        .get("/api/read/")
+        .then((response) => {
+          setContact(response.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+
+    getData();
+  }, []);
 
   const columns = [
     {
@@ -66,16 +95,39 @@ const Home = () => {
     console.log(rowData, "test");
   };
 
-  const deleteConfirmation = () => {
+  // const deleteConfirmation = () => {
+  //   if (deleteData) {
+  //     const updatedData = tableData.filter((item) => item.id !== deleteData.id);
+  //     setDataTable(updatedData);
+  //   }
+  //   setIsDeleteModal(false);
+  //   showToast("Data deleted!", "info", {
+  //     theme: "dark",
+  //     icon: false,
+  //   });
+  // };
+
+  const deleteConfirmation = async () => {
     if (deleteData) {
-      const updatedData = tableData.filter((item) => item.id !== deleteData.id);
-      setDataTable(updatedData);
+      try {
+        await axios.delete(`/api/delete/${deleteData.id}`);
+        const updatedContacts = contact.filter(
+          (item) => item.id !== deleteData.id
+        );
+        setContact(updatedContacts);
+        setIsDeleteModal(false);
+        showToast("Data deleted successfully!", "info", {
+          theme: "dark",
+          icon: false,
+        });
+      } catch (error) {
+        console.error("Error deleting contact:", error);
+        showToast("Failed to delete data", "error", {
+          theme: "dark",
+          icon: false,
+        });
+      }
     }
-    setIsDeleteModal(false);
-    showToast("Data deleted!", "info", {
-      theme: "dark",
-      icon: false,
-    });
   };
 
   // const deleteContact = (data) => {
@@ -100,9 +152,10 @@ const Home = () => {
     <ProtectedRoute>
       <main>
         <ToastNotification />
+        {contact.length}
         <Table
           columns={columns}
-          data={dataTable}
+          data={contact}
           onEdit={handleEdit}
           onDelete={handleDeleteModal}
         />

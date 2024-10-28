@@ -6,6 +6,7 @@ import CheckCircle from "@/app/assets/check_circle.svg";
 import Input from "../Input/Input";
 import { useForm, Controller } from "react-hook-form";
 import { showToast } from "../Toastify/Toastify";
+import axios from "axios";
 
 const CreateModal = ({ isModalOpen, handleModal, closeModal }) => {
   const {
@@ -26,20 +27,22 @@ const CreateModal = ({ isModalOpen, handleModal, closeModal }) => {
   const onSubmit = async (data) => {
     console.log(data);
 
-    const response = await fetch("/api/create/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+    try {
+      const response = await axios.post("/api/create/", data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-    const result = await response.json();
-    console.log("Response:", result);
+      console.log("Response:", response.data);
 
-    showToast("This is a success message!", "success");
-    reset();
-    closeModal();
+      showToast("This is a success message!", "success");
+      reset();
+      closeModal();
+    } catch (error) {
+      console.error("Error:", error);
+      showToast("An error occurred. Please try again.", "error");
+    }
   };
 
   return (
