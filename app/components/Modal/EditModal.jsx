@@ -10,7 +10,13 @@ import { showToast } from "../Toastify/Toastify";
 import tableData from "@/app/data/MOCK_DATA.json";
 import axios from "axios";
 
-const EditModal = ({ isModalOpen, closeModal, editData, deleteFunction }) => {
+const EditModal = ({
+  isModalOpen,
+  closeModal,
+  editData,
+  deleteFunction,
+  refreshData,
+}) => {
   const [dataTable, setDataTable] = useState(tableData);
   const {
     control,
@@ -67,6 +73,7 @@ const EditModal = ({ isModalOpen, closeModal, editData, deleteFunction }) => {
 
       // Show success message and close the modal
       showToast("This is a success message!", "success");
+      refreshData();
       reset();
       closeModal();
     } catch (error) {

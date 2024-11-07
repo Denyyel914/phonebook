@@ -61,6 +61,15 @@ const Home = () => {
     getData();
   }, []);
 
+  const refreshData = async () => {
+    try {
+      const response = await axios.get("/api/read/");
+      setContact(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const columns = [
     {
       Header: "ID",
@@ -120,6 +129,7 @@ const Home = () => {
           theme: "dark",
           icon: false,
         });
+        refreshData();
       } catch (error) {
         console.error("Error deleting contact:", error);
         showToast("Failed to delete data", "error", {
@@ -151,6 +161,7 @@ const Home = () => {
       </main>
       <EditModal
         isModalOpen={isEditModal}
+        refreshData={refreshData}
         closeModal={closeModal}
         editData={editData}
         deleteFunction={handleDeleteFromEditModal}
