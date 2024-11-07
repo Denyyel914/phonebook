@@ -6,7 +6,9 @@ import saveIcon from "@/app/assets/save.svg";
 import deleteIcon from "@/app/assets/delete.svg";
 import Input from "../Input/Input";
 import { useForm, Controller } from "react-hook-form";
+import { showToast } from "../Toastify/Toastify";
 import tableData from "@/app/data/MOCK_DATA.json";
+import axios from "axios";
 
 const EditModal = ({ isModalOpen, closeModal, editData, deleteFunction }) => {
   const [dataTable, setDataTable] = useState(tableData);
@@ -18,9 +20,9 @@ const EditModal = ({ isModalOpen, closeModal, editData, deleteFunction }) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      contactName: "",
-      areaCode: "",
-      phoneNumber: "",
+      contact_name: "",
+      area_code: "",
+      phone_number: "",
       email: "",
       address: "",
     },
@@ -35,11 +37,12 @@ const EditModal = ({ isModalOpen, closeModal, editData, deleteFunction }) => {
 
   useEffect(() => {
     if (editData) {
+      console.log("Edit data:", editData); // Log editData to verify values
       reset({
         id: editData.id,
-        contactName: editData.contact_name || "",
-        areaCode: editData.area_code || "",
-        phoneNumber: editData.phone_number || "",
+        contact_name: editData.contact_name || "",
+        area_code: editData.area_code || "",
+        phone_number: editData.phone_number || "",
         email: editData.email || "",
         address: editData.address || "",
       });
@@ -47,14 +50,31 @@ const EditModal = ({ isModalOpen, closeModal, editData, deleteFunction }) => {
     }
   }, [editData, reset]);
 
-  const onDelete = () => {
-    console.log(editData);
-    console.log(dataTable);
-    // const updatedData = tableData.filter((item) => item.id !== deleteData.id);
-  };
-  const onSubmit = (data) => {
-    console.log(data, "submit");
-    reset();
+  // const onDelete = () => {
+  //   console.log(editData);
+  //   console.log(dataTable);
+  //   // const updatedData = tableData.filter((item) => item.id !== deleteData.id);
+  // };
+
+  const onSubmit = async (data) => {
+    console.log(data.id);
+    // try {
+    //   const response = await axios.put(`/api/update/${data.id}`, data, {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   });
+
+    //   console.log("Response:", response.data);
+
+    //   // Show success message and close the modal
+    //   showToast("This is a success message!", "success");
+    //   reset();
+    //   closeModal();
+    // } catch (error) {
+    //   console.error("Error:", error);
+    //   showToast("An error occurred. Please try again.", "error");
+    // }
   };
 
   return (
@@ -69,7 +89,7 @@ const EditModal = ({ isModalOpen, closeModal, editData, deleteFunction }) => {
         <div className="w-[35vw]">
           <form onSubmit={handleSubmit(onSubmit)}>
             <Controller
-              name="contactName"
+              name="contact_name"
               control={control}
               rules={{ required: "Contact name is required" }}
               render={({ field }) => (
@@ -77,14 +97,14 @@ const EditModal = ({ isModalOpen, closeModal, editData, deleteFunction }) => {
                   {...field}
                   placeholder="test title"
                   label="Contact name"
-                  errorMessage={errors.contactName?.message}
+                  errorMessage={errors.contact_name?.message}
                 />
               )}
             />
             <div className="flex justify-between mt-5">
               <div>
                 <Controller
-                  name="areaCode"
+                  name="area_code"
                   control={control}
                   rules={{ required: "Area code is required" }}
                   render={({ field }) => (
@@ -93,14 +113,14 @@ const EditModal = ({ isModalOpen, closeModal, editData, deleteFunction }) => {
                       placeholder="Area code"
                       label="Area code"
                       customClassName="w-[150px]"
-                      errorMessage={errors.areaCode?.message}
+                      errorMessage={errors.area_code?.message}
                     />
                   )}
                 />
               </div>
               <div className="flex-grow ml-4">
                 <Controller
-                  name="phoneNumber"
+                  name="phone_number"
                   control={control}
                   rules={{ required: "Phone number is required" }}
                   render={({ field }) => (
@@ -109,7 +129,7 @@ const EditModal = ({ isModalOpen, closeModal, editData, deleteFunction }) => {
                       placeholder="Phone number"
                       label="Phone number"
                       customClassName="w-full"
-                      errorMessage={errors.phoneNumber?.message}
+                      errorMessage={errors.phone_number?.message}
                     />
                   )}
                 />

@@ -130,23 +130,12 @@ const Home = () => {
     }
   };
 
-  // const deleteContact = (data) => {
-  //   console.log(data);
-  //   const updatedData = tableData.filter((item) => item.id !== data.id);
-  //   setDataTable(updatedData);
-  //   setIsEditModal(false);
-  //   showToast("Data deleted!", "info", {
-  //     theme: "dark",
-  //     icon: false,
-  //   });
-  // };
-
   const handleDeleteFromEditModal = (contact) => {
     console.log(contact);
 
     setDeleteData(contact);
     setIsDeleteModal(true);
-    setIsEditModal(false);
+    // setIsEditModal(false);
   };
   return (
     <ProtectedRoute>

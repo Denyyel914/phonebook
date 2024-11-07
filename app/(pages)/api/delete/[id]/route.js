@@ -36,7 +36,7 @@ import { NextResponse } from "next/server";
 import { query } from "../../../../lib/db"; // Ensure this path is correct
 
 export async function DELETE(request, { params }) {
-  const { id } = params; // Retrieve the contact ID from the URL params
+  const { id } = params;
 
   try {
     const result = await query(
