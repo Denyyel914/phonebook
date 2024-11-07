@@ -37,7 +37,6 @@ const EditModal = ({ isModalOpen, closeModal, editData, deleteFunction }) => {
 
   useEffect(() => {
     if (editData) {
-      console.log("Edit data:", editData); // Log editData to verify values
       reset({
         id: editData.id,
         contact_name: editData.contact_name || "",
@@ -57,24 +56,23 @@ const EditModal = ({ isModalOpen, closeModal, editData, deleteFunction }) => {
   // };
 
   const onSubmit = async (data) => {
-    console.log(data.id);
-    // try {
-    //   const response = await axios.put(`/api/update/${data.id}`, data, {
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   });
+    try {
+      const response = await axios.put(`/api/update/${data.id}`, data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-    //   console.log("Response:", response.data);
+      console.log("Response:", response.data);
 
-    //   // Show success message and close the modal
-    //   showToast("This is a success message!", "success");
-    //   reset();
-    //   closeModal();
-    // } catch (error) {
-    //   console.error("Error:", error);
-    //   showToast("An error occurred. Please try again.", "error");
-    // }
+      // Show success message and close the modal
+      showToast("This is a success message!", "success");
+      reset();
+      closeModal();
+    } catch (error) {
+      console.error("Error:", error);
+      showToast("An error occurred. Please try again.", "error");
+    }
   };
 
   return (
