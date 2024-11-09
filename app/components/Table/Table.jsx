@@ -10,9 +10,8 @@ import Image from "next/image";
 import editIcon from "@/app/assets/table/edit.svg";
 import deleteIcon from "@/app/assets/button-delete.svg";
 
-const Table = ({ columns, data, onEdit, onDelete }) => {
+const Table = ({ columns, data, onEdit, onDelete, onSearch }) => {
   const [search, setSearch] = useState("");
-  const [itemsPerPage, setItemsPerPage] = useState(10);
 
   const dataTable = useMemo(() => data, [data]);
   const table = useReactTable({
@@ -20,10 +19,13 @@ const Table = ({ columns, data, onEdit, onDelete }) => {
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
+
   const handleChange = (e) => {
-    console.log(e.target.value);
-    setSearch(e.target.value);
+    const searchValue = e.target.value;
+    setSearch(searchValue);
+    onSearch(searchValue); // call onSearch from props
   };
+
   return (
     <div>
       <div className="flex justify-between">
@@ -31,16 +33,8 @@ const Table = ({ columns, data, onEdit, onDelete }) => {
           placeholder="Search Contacts"
           value={search}
           onChange={handleChange}
-          //   label="Contact name"
-          //   errorMessage={errors.contactName?.message}
         />
-        <div className="flex">
-          {/* <div>1</div>
-          <div>2</div>
-          <div>3</div>
-          <div>4</div> */}
-          <Pagination />
-        </div>
+        <Pagination />
       </div>
       <table className="mt-5 w-full">
         {table.getHeaderGroups().map((headerGroup) => (
@@ -48,7 +42,7 @@ const Table = ({ columns, data, onEdit, onDelete }) => {
             {headerGroup.headers.map((header) => (
               <th
                 key={header.id}
-                className="py-3 px-4  text-left p-2 border-b  text-black-700 font-medium text-sm text-nowrap uppercase"
+                className="py-3 px-4 text-left p-2 border-b text-black-700 font-medium text-sm uppercase"
               >
                 {flexRender(
                   header.column.columnDef.Header,
@@ -65,21 +59,21 @@ const Table = ({ columns, data, onEdit, onDelete }) => {
               {row.getVisibleCells().map((cell) => (
                 <td
                   key={cell.id}
-                  className="p-2 border-b border-[#C3C6CF] text-[#1A1C1E] font-normal text-sm text-clip"
+                  className="p-2 border-b border-[#C3C6CF] text-[#1A1C1E] font-normal text-sm"
                 >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
-              <td className="p-2 border-b border-[#C3C6CF] text-[#1A1C1E] font-normal text-sm  text-clip">
+              <td className="p-2 border-b border-[#C3C6CF] text-[#1A1C1E] font-normal text-sm">
                 <div className="flex">
                   <Image
                     src={editIcon}
-                    alt="Check Circle"
+                    alt="Edit"
                     onClick={() => onEdit(row.original)}
                   />
                   <Image
                     src={deleteIcon}
-                    alt="Check Circle"
+                    alt="Delete"
                     onClick={() => onDelete(row.original)}
                   />
                 </div>

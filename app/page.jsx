@@ -13,38 +13,11 @@ import { showToast } from "./components/Toastify/Toastify";
 const Home = () => {
   const [dataTable, setDataTable] = useState(tableData);
   const [contact, setContact] = useState([]);
+  const [searchData, setSearchData] = useState(null);
   const [isEditModal, setIsEditModal] = useState(false);
   const [isDeleteModal, setIsDeleteModal] = useState(false);
   const [editData, setEditData] = useState([]);
   const [deleteData, setDeleteData] = useState();
-
-  // useEffect(() => {
-  //   const getApi = async () => {
-  //     try {
-  //       const response = await axios.get(
-  //         "https://jsonplaceholder.typicode.com/posts"
-  //       );
-  //       setDataTable(response.data);
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //     }
-  //   };
-  //   getApi();
-  //   console.log(dataTable);
-  // }, []);
-
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     try {
-  //       const response = await axios.get("/api/read/");
-  //       setContact(response.data);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-
-  //   getData();
-  // }, []);
 
   useEffect(() => {
     const getData = async () => {
@@ -67,6 +40,19 @@ const Home = () => {
       setContact(response.data);
     } catch (err) {
       console.log(err);
+    }
+  };
+
+  const handleSearch = async (searchValue) => {
+    try {
+      if (searchValue) {
+        const response = await axios.get(`/api/search?query=${searchValue}`);
+        setSearchData(response.data); // update search data
+      } else {
+        setSearchData(null); // reset to show all data if search is cleared
+      }
+    } catch (error) {
+      console.error("Error fetching search results:", error);
     }
   };
 
@@ -104,18 +90,6 @@ const Home = () => {
     console.log(rowData, "test");
   };
 
-  // const deleteConfirmation = () => {
-  //   if (deleteData) {
-  //     const updatedData = tableData.filter((item) => item.id !== deleteData.id);
-  //     setDataTable(updatedData);
-  //   }
-  //   setIsDeleteModal(false);
-  //   showToast("Data deleted!", "info", {
-  //     theme: "dark",
-  //     icon: false,
-  //   });
-  // };
-
   const deleteConfirmation = async () => {
     if (deleteData) {
       try {
@@ -151,12 +125,13 @@ const Home = () => {
     <ProtectedRoute>
       <main>
         <ToastNotification />
-        {contact.length}
+        {/* {contact.length} */}
         <Table
           columns={columns}
-          data={contact}
+          data={searchData || contact} // use search data if available, otherwise fallback to full data
           onEdit={handleEdit}
           onDelete={handleDeleteModal}
+          onSearch={handleSearch} // pass handleSearch to Table component
         />
       </main>
       <EditModal
