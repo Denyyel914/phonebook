@@ -13,6 +13,7 @@
     "@azure/msal-react": "^2.0.22",
     "@tanstack/react-table": "^8.20.1",
     "axios": "^1.7.3",
+    "lodash": "^4.17.21",
     "next": "14.2.4",
     "pg": "^8.13.0",
     "react": "^18",

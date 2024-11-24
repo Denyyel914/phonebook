@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import ProtectedRoute from "./msal/ProtectRoute";
 import Table from "./components/Table/Table";
 import axios from "axios";
@@ -8,6 +8,7 @@ import EditModal from "./components/Modal/EditModal";
 import DeleteModal from "./components/Modal/DeleteModal";
 import tableData from "@/app/data/MOCK_DATA.json";
 import ToastNotification from "./components/Toastify/Toastify";
+import debounce from "lodash/debounce";
 import { showToast } from "./components/Toastify/Toastify";
 
 const Home = () => {
@@ -19,20 +20,36 @@ const Home = () => {
   const [editData, setEditData] = useState([]);
   const [deleteData, setDeleteData] = useState();
 
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     await axios
+  //       .get("/api/read/")
+  //       .then((response) => {
+  //         setContact(response.data);
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //   };
+
+  //   getData();
+  // }, [contact]);
+
   useEffect(() => {
     const getData = async () => {
-      await axios
-        .get("/api/read/")
-        .then((response) => {
-          setContact(response.data);
-        })
-        .catch((err) => {
+      // Fetch data only if it's empty
+      if (contact.length === 0) {
+        try {
+          const response = await axios.get("/api/read/");
+          setContact(response.data); // Update the contact state
+        } catch (err) {
           console.log(err);
-        });
+        }
+      }
     };
 
     getData();
-  }, []);
+  }, [contact]);
 
   const refreshData = async () => {
     try {
@@ -43,18 +60,18 @@ const Home = () => {
     }
   };
 
-  const handleSearch = async (searchValue) => {
-    try {
-      if (searchValue) {
+  // Debounced search function to limit API calls
+  const handleSearch = useCallback(
+    debounce(async (searchValue) => {
+      try {
         const response = await axios.get(`/api/search?query=${searchValue}`);
-        setSearchData(response.data); // update search data
-      } else {
-        setSearchData(null); // reset to show all data if search is cleared
+        setSearchData(response.data); // Pass results back to parent
+      } catch (error) {
+        console.error("Error fetching search results:", error);
       }
-    } catch (error) {
-      console.error("Error fetching search results:", error);
-    }
-  };
+    }, 300),
+    []
+  );
 
   const columns = [
     {
@@ -103,7 +120,7 @@ const Home = () => {
           theme: "dark",
           icon: false,
         });
-        refreshData();
+        // refreshData();
       } catch (error) {
         console.error("Error deleting contact:", error);
         showToast("Failed to delete data", "error", {
@@ -121,6 +138,7 @@ const Home = () => {
     setIsDeleteModal(true);
     // setIsEditModal(false);
   };
+
   return (
     <ProtectedRoute>
       <main>

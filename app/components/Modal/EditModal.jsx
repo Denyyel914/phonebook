@@ -73,7 +73,7 @@ const EditModal = ({
 
       // Show success message and close the modal
       showToast("This is a success message!", "success");
-      refreshData();
+      // refreshData();
       reset();
       closeModal();
     } catch (error) {
