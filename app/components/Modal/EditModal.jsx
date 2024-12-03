@@ -55,12 +55,6 @@ const EditModal = ({
     }
   }, [editData, reset]);
 
-  // const onDelete = () => {
-  //   console.log(editData);
-  //   console.log(dataTable);
-  //   // const updatedData = tableData.filter((item) => item.id !== deleteData.id);
-  // };
-
   const onSubmit = async (data) => {
     try {
       const response = await axios.put(`/api/update/${data.id}`, data, {

@@ -20,21 +20,6 @@ const Home = () => {
   const [editData, setEditData] = useState([]);
   const [deleteData, setDeleteData] = useState();
 
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     await axios
-  //       .get("/api/read/")
-  //       .then((response) => {
-  //         setContact(response.data);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   };
-
-  //   getData();
-  // }, [contact]);
-
   useEffect(() => {
     const getData = async () => {
       // Fetch data only if it's empty
@@ -136,14 +121,13 @@ const Home = () => {
 
     setDeleteData(contact);
     setIsDeleteModal(true);
-    // setIsEditModal(false);
   };
 
   return (
     <ProtectedRoute>
       <main>
         <ToastNotification />
-        {/* {contact.length} */}
+
         <Table
           columns={columns}
           data={searchData || contact} // use search data if available, otherwise fallback to full data
