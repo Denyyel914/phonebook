@@ -7,7 +7,9 @@ const Pagination = () => {
         <div className="ml-2">
           <select className="text-[#0077d4] text-center rounded-md bg-white">
             {entryList.map((entry) => (
-              <option value={entry}>{entry}</option>
+              <option key={entry} value={entry}>
+                {entry}
+              </option>
             ))}
           </select>
         </div>
