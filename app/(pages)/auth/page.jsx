@@ -3,7 +3,6 @@ import { msalConfig } from "@/app/msal/authConfig.js";
 import { useMsal, useIsAuthenticated } from "@azure/msal-react";
 import { useEffect } from "react";
 import { InteractionStatus } from "@azure/msal-browser";
-// import PageLoader from '@/components/PageLoader/Index.jsx'
 
 const Logging = () => {
   const { instance, inProgress } = useMsal();
@@ -20,7 +19,7 @@ const Logging = () => {
       localStorage.setItem("isLoggedIn", true);
       initializeInstance();
     }
-  }, []);
+  }, [inProgress, initializeInstance, isAuthenticated]); // Include dependencies here
 
   return (
     <>
