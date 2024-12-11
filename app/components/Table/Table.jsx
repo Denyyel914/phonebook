@@ -54,7 +54,7 @@ const Table = ({ columns, data, onEdit, onDelete, onSearch }) => {
       </div>
       <table className="mt-5 w-full">
         {table.getHeaderGroups().map((headerGroup) => (
-          <thead>
+          <thead key={headerGroup.id}>
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
                 <th
