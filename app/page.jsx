@@ -92,7 +92,7 @@ const Home = () => {
     console.log(rowData, "test");
   };
 
-  const deleteConfirmation = async () => {
+  const deleteConfirmation = useCallback(async () => {
     if (deleteData) {
       try {
         await axios.delete(`/api/delete/${deleteData.id}`);
@@ -105,7 +105,7 @@ const Home = () => {
           theme: "dark",
           icon: false,
         });
-        // refreshData();
+        refreshData();
       } catch (error) {
         console.error("Error deleting contact:", error);
         showToast("Failed to delete data", "error", {
@@ -114,8 +114,7 @@ const Home = () => {
         });
       }
     }
-  };
-
+  }, [deleteData, contact, refreshData]);
   const handleDeleteFromEditModal = (contact) => {
     console.log(contact);
 
