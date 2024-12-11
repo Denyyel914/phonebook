@@ -54,23 +54,25 @@ const Table = ({ columns, data, onEdit, onDelete, onSearch }) => {
       </div>
       <table className="mt-5 w-full">
         {table.getHeaderGroups().map((headerGroup) => (
-          <tr key={headerGroup.id}>
-            {headerGroup.headers.map((header) => (
-              <th
-                key={header.id}
-                className="py-3 px-4 text-left p-2 border-b text-black-700 font-medium text-sm uppercase"
-                onClick={header.column.getToggleSortingHandler()} // Sort toggle handler
-              >
-                <div className="flex items-center">
-                  {flexRender(
-                    header.column.columnDef.header,
-                    header.getContext()
-                  )}
-                  <span className="ml-2">{getSortIcon(header.column)}</span>
-                </div>
-              </th>
-            ))}
-          </tr>
+          <thead>
+            <tr key={headerGroup.id}>
+              {headerGroup.headers.map((header) => (
+                <th
+                  key={header.id}
+                  className="py-3 px-4 text-left p-2 border-b text-black-700 font-medium text-sm uppercase"
+                  onClick={header.column.getToggleSortingHandler()} // Sort toggle handler
+                >
+                  <div className="flex items-center">
+                    {flexRender(
+                      header.column.columnDef.header,
+                      header.getContext()
+                    )}
+                    <span className="ml-2">{getSortIcon(header.column)}</span>
+                  </div>
+                </th>
+              ))}
+            </tr>
+          </thead>
         ))}
 
         <tbody>

@@ -17,20 +17,16 @@ const AppLayout = ({ children }) => {
   };
 
   return (
-    <html lang="en">
-      <body>
-        <div className="flex flex-col">
-          <Header onToggleSidebar={toggleSidebar} />
-          <div className="flex flex-1">
-            <Sidebar isExpanded={isSidebarExpanded} />
-            <div className="flex-1 pt-24 px-12 pb-12 lg:px-12 relative overflow-y-auto max-h-screen">
-              <div className="overflow-auto">{children}</div>
-            </div>
-            <Footer />
-          </div>
+    <div className="flex flex-col">
+      <Header onToggleSidebar={toggleSidebar} />
+      <div className="flex flex-1">
+        <Sidebar isExpanded={isSidebarExpanded} />
+        <div className="flex-1 pt-24 px-12 pb-12 lg:px-12 relative overflow-y-auto max-h-screen">
+          <div className="overflow-auto">{children}</div>
         </div>
-      </body>
-    </html>
+        <Footer />
+      </div>
+    </div>
   );
 };
 
