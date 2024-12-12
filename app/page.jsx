@@ -101,6 +101,7 @@ const Home = () => {
         );
         setContact(updatedContacts);
         setIsDeleteModal(false);
+        setIsEditModal(false);
         showToast("Data deleted successfully!", "info", {
           theme: "dark",
           icon: false,

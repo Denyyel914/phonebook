@@ -1,38 +1,43 @@
 import { NextResponse } from "next/server";
-import { query } from "../../../lib/db";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
-  const queryTerm = searchParams.get("query"); // get the search term from the query string
+  const queryTerm = searchParams.get("query");
 
   try {
-    // If no search term, return all contacts
+    let contacts;
+
     if (!queryTerm) {
-      const allContacts = await query("SELECT * FROM phonebook");
-      return NextResponse.json(allContacts.rows, { status: 200 });
+      // If no search term, return all contacts
+      contacts = await prisma.phonebook.findMany();
+    } else {
+      // Case-insensitive search using `contains` with `mode: 'insensitive'`
+      contacts = await prisma.phonebook.findMany({
+        where: {
+          OR: [
+            { contactName: { contains: queryTerm, mode: "insensitive" } },
+            { areaCode: { contains: queryTerm, mode: "insensitive" } },
+            { phoneNumber: { contains: queryTerm, mode: "insensitive" } },
+            { email: { contains: queryTerm, mode: "insensitive" } },
+            { address: { contains: queryTerm, mode: "insensitive" } },
+            { id: { equals: parseInt(queryTerm) || undefined } },
+          ],
+        },
+        orderBy: { id: "desc" },
+      });
     }
 
-    // Use ILIKE for case-insensitive search across columns
-    const searchQuery = `
-      SELECT * FROM phonebook
-      WHERE 
-        contact_name ILIKE $1 OR 
-        area_code ILIKE $1 OR
-        phone_number ILIKE $1 OR
-        email ILIKE $1 OR
-        address  ILIKE $1 OR 
-        id::text ILIKE $1
-    `;
-
-    const values = [`%${queryTerm}%`]; // the search term wrapped in wildcards
-    const result = await query(searchQuery, values);
-
-    return NextResponse.json(result.rows, { status: 200 });
+    return NextResponse.json(contacts, { status: 200 });
   } catch (error) {
-    console.error("Error in search query:", error);
+    console.error("Error retrieving data:", error);
     return NextResponse.json(
       { message: "Error retrieving data", details: error.message },
       { status: 500 }
     );
+  } finally {
+    await prisma.$disconnect(); // Ensure the Prisma Client connection is closed
   }
 }
