@@ -32,27 +32,52 @@
 //   }
 // }
 
+// import { NextResponse } from "next/server";
+// import { query } from "../../../../lib/db"; // Ensure this path is correct
+
+// export async function DELETE(request, { params }) {
+//   const { id } = params;
+
+//   try {
+//     const result = await query(
+//       "DELETE FROM phonebook WHERE id = $1 RETURNING *",
+//       [id]
+//     );
+
+//     if (result.rowCount === 0) {
+//       return NextResponse.json(
+//         { message: "Contact not found" },
+//         { status: 404 }
+//       );
+//     }
+
+//     return NextResponse.json(
+//       { message: "Contact deleted successfully", contact: result.rows[0] },
+//       { status: 200 }
+//     );
+//   } catch (error) {
+//     console.error("Error deleting contact:", error);
+//     return NextResponse.json(
+//       { error: "Failed to delete contact", details: error.message },
+//       { status: 500 }
+//     );
+//   }
+// }
+
 import { NextResponse } from "next/server";
-import { query } from "../../../../lib/db"; // Ensure this path is correct
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export async function DELETE(request, { params }) {
   const { id } = params;
 
   try {
-    const result = await query(
-      "DELETE FROM phonebook WHERE id = $1 RETURNING *",
-      [id]
-    );
-
-    if (result.rowCount === 0) {
-      return NextResponse.json(
-        { message: "Contact not found" },
-        { status: 404 }
-      );
-    }
-
+    const deleteContact = await prisma.phonebook.delete({
+      where: { id: parseInt(id) },
+    });
     return NextResponse.json(
-      { message: "Contact deleted successfully", contact: result.rows[0] },
+      { message: "Contact deleted successfully", contact: deleteContact },
       { status: 200 }
     );
   } catch (error) {
@@ -61,5 +86,7 @@ export async function DELETE(request, { params }) {
       { error: "Failed to delete contact", details: error.message },
       { status: 500 }
     );
+  } finally {
+    await prisma.$disconnect(); // Close the Prisma Client connection
   }
 }

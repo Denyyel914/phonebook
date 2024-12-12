@@ -65,12 +65,12 @@ const Home = () => {
     },
     {
       Header: "Contact Name",
-      accessorKey: "contact_name",
+      accessorKey: "contactName",
     },
 
     {
       Header: "Phone Number",
-      accessorKey: "phone_number",
+      accessorKey: "phoneNumber",
     },
     // {
     //   Header: "Action",

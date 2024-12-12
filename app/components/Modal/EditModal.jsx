@@ -43,11 +43,12 @@ const EditModal = ({
 
   useEffect(() => {
     if (editData) {
+      console.log(editData);
       reset({
         id: editData.id,
-        contact_name: editData.contact_name || "",
-        area_code: editData.area_code || "",
-        phone_number: editData.phone_number || "",
+        contact_name: editData.contactName || "",
+        area_code: editData.areaCode || "",
+        phone_number: editData.phoneNumber || "",
         email: editData.email || "",
         address: editData.address || "",
       });
