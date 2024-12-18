@@ -37,7 +37,7 @@ const CreateModal = ({ isModalOpen, handleModal, closeModal }) => {
       console.log("Response:", response.data);
 
       showToast("This is a success message!", "success");
-
+      location.reload();
       reset();
       closeModal();
     } catch (error) {
