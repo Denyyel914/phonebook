@@ -37,7 +37,7 @@ const Header = ({ onToggleSidebar }) => {
             height={24}
             onClick={onToggleSidebar}
           />
-          <h1 className="text-xl text-pc-40">Phonebook</h1>
+          <h1 className="text-xl text-pc-40">Phone book</h1>
         </div>
         <div className="flex justify-center items-center">
           <Button
