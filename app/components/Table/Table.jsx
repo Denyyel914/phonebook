@@ -71,6 +71,7 @@ const Table = ({ columns, data, onEdit, onDelete, onSearch }) => {
                   </div>
                 </th>
               ))}
+              <th className="py-3 px-4 border-b"></th>
             </tr>
           </thead>
         ))}
@@ -86,7 +87,7 @@ const Table = ({ columns, data, onEdit, onDelete, onSearch }) => {
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
-              <td className="p-2 border-b border-[#C3C6CF] text-[#1A1C1E] font-normal text-sm">
+              <td className="p-2 border-b border-[#C3C6CF] text-[#1A1C1E] font-normal text-sm ">
                 <div className="flex">
                   <Image
                     src={editIcon}
