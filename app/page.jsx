@@ -36,14 +36,14 @@ const Home = () => {
     getData();
   }, [contact]);
 
-  const refreshData = async () => {
+  const refreshData = useCallback(async () => {
     try {
       const response = await axios.get("/api/read/");
       setContact(response.data);
     } catch (err) {
       console.log(err);
     }
-  };
+  }, []);
 
   // Debounced search function to limit API calls
   const handleSearch = useCallback(
